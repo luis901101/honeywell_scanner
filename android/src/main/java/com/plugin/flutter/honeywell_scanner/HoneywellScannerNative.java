@@ -22,7 +22,6 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
     private transient AidcManager scannerManager;
     private transient BarcodeReader scanner;
     private transient Map<String, Object> properties;
-    private transient Map<String, Object> initialProperties;
 
     public HoneywellScannerNative(Context context)
     {
@@ -47,7 +46,6 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
             scanner = scannerManager.createBarcodeReader();
             // register bar code event listener
             scanner.addBarcodeListener(this);
-            initialProperties = scanner.getAllProperties();
 
             // set the trigger mode to client control
             try {
@@ -126,8 +124,8 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
     public boolean pauseScanner()
     {
         if (scanner != null) {
-            // release the scanner claim so we don't get any scanner
-            // notifications while paused.
+            // release the scanner claim so we don't get any scanner notifications while paused
+            // and the scanner properties are restored to default.
             scanner.release();
         }
         pendingResume = false;
@@ -157,18 +155,6 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
         pendingResume = false;
         try
         {
-            // resetting to initial properties, these are the properties before starting the scanner
-            // and setting custom properties.
-            if (scanner != null)
-                scanner.setProperties(initialProperties);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        try
-        {
             if (scanner != null) {
                 // unregister barcode event listener
                 scanner.removeBarcodeListener(this);
@@ -176,6 +162,10 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
                 // unregister trigger state change listener
                 // When using Automatic Trigger control do not need to implement the onTriggerEvent
                 // function scanner.removeTriggerListener(this);
+
+                // release the scanner claim so we don't get any scanner notifications while paused
+                // and the scanner properties are restored to default.
+                scanner.release();
 
                 // close BarcodeReader to clean up resources.
                 scanner.close();

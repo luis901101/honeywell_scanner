@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 
 void main() {
@@ -7,13 +8,12 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  HoneywellScanner honeywellScanner = HoneywellScanner();
-
   @override
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> implements ScannerCallBack {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements ScannerCallBack{
+  HoneywellScanner honeywellScanner = HoneywellScanner();
   String scannedCode = 'Empty';
   bool scannerEnabled = false;
   bool scan1DFormats = true;
@@ -22,7 +22,8 @@ class _MyAppState extends State<MyApp> implements ScannerCallBack {
   @override
   void initState() {
     super.initState();
-    widget.honeywellScanner.setScannerCallBack(this);
+    WidgetsBinding.instance.addObserver(this);
+    honeywellScanner.setScannerCallBack(this);
     updateScanProperties();
   }
 
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> implements ScannerCallBack {
 //    codeFormats.add(CodeFormat.UPC_E);
 ////    codeFormats.add(CodeFormat.UPC_EAN_EXTENSION);
 
-    widget.honeywellScanner.setProperties(
+    honeywellScanner.setProperties(
         CodeFormatUtils.getAsPropertiesComplement(codeFormats));
   }
 
@@ -111,7 +112,7 @@ class _MyAppState extends State<MyApp> implements ScannerCallBack {
             ElevatedButton(
               child: Text("Start Scanner"),
               onPressed: () {
-                widget.honeywellScanner.startScanner();
+                honeywellScanner.startScanner();
                 scannerEnabled = true;
                 setState(() {});
               },
@@ -122,7 +123,7 @@ class _MyAppState extends State<MyApp> implements ScannerCallBack {
             ElevatedButton(
               child: Text("Stop Scanner"),
               onPressed: () {
-                widget.honeywellScanner.stopScanner();
+                honeywellScanner.stopScanner();
                 scannerEnabled = false;
                 setState(() {});
               },
@@ -131,5 +132,33 @@ class _MyAppState extends State<MyApp> implements ScannerCallBack {
         ),
       ),
     );
+  }
+  
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    if(state == null) return;
+    switch(state){
+      case AppLifecycleState.resumed:
+        if(honeywellScanner != null) honeywellScanner.resumeScanner();
+        break;
+      case AppLifecycleState.inactive:
+        if(honeywellScanner != null) honeywellScanner.pauseScanner();
+        break;
+      case AppLifecycleState.paused://AppLifecycleState.paused is used as stopped state because deactivate() works more as a pause for lifecycle
+        if(honeywellScanner != null) honeywellScanner.pauseScanner();
+        break;
+      case AppLifecycleState.detached:
+        if(honeywellScanner != null) honeywellScanner.pauseScanner();
+        break;
+      default:
+        break;
+    }
+  }
+
+  @override
+  void dispose() {
+    if(honeywellScanner != null) honeywellScanner.stopScanner();
+    super.dispose();
   }
 }
