@@ -8,6 +8,9 @@
 ### Fixed
 - Bug on releasing the scanner claim when **stopScanner** was called
 
+### Removed
+- Unsupported CodeFormats ITF and UPC_EAN_EXTENSION.
+
 ## 1.0.1+3 (2020-10-10)
 ### Fixed
 - Support for latest flutter frameworks

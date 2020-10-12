@@ -165,53 +165,11 @@ extension CodeFormatUtils on CodeFormat {
 
   /// This function is Deprecated, [codeFormat.propertyName] instead
   @deprecated
-  String getPropertyName(CodeFormat value) {
-    if (value == null) return null;
-    try {
-      switch (value) {
-        case CodeFormat.AZTEC:
-          return _CODE_FORMAT_PROPERTY_AZTEC_ENABLED;
-        case CodeFormat.CODABAR:
-          return _CODE_FORMAT_PROPERTY_CODABAR_ENABLED;
-        case CodeFormat.CODE_39:
-          return _CODE_FORMAT_PROPERTY_CODE_39_ENABLED;
-        case CodeFormat.CODE_93:
-          return _CODE_FORMAT_PROPERTY_CODE_93_ENABLED;
-        case CodeFormat.CODE_128:
-          return _CODE_FORMAT_PROPERTY_CODE_128_ENABLED;
-        case CodeFormat.DATA_MATRIX:
-          return _CODE_FORMAT_PROPERTY_DATAMATRIX_ENABLED;
-        case CodeFormat.EAN_8:
-          return _CODE_FORMAT_PROPERTY_EAN_8_ENABLED;
-        case CodeFormat.EAN_13:
-          return _CODE_FORMAT_PROPERTY_EAN_13_ENABLED;
-        case CodeFormat.MAXICODE:
-          return _CODE_FORMAT_PROPERTY_MAXICODE_ENABLED;
-        case CodeFormat.PDF_417:
-          return _CODE_FORMAT_PROPERTY_PDF_417_ENABLED;
-        case CodeFormat.QR_CODE:
-          return _CODE_FORMAT_PROPERTY_QR_CODE_ENABLED;
-        case CodeFormat.RSS_14:
-          return _CODE_FORMAT_PROPERTY_RSS_ENABLED;
-        case CodeFormat.RSS_EXPANDED:
-          return _CODE_FORMAT_PROPERTY_RSS_EXPANDED_ENABLED;
-        case CodeFormat.UPC_A:
-          return _CODE_FORMAT_PROPERTY_UPC_A_ENABLE;
-        case CodeFormat.UPC_E:
-          return _CODE_FORMAT_PROPERTY_UPC_E_ENABLED;
-        default:
-      }
-    } catch (e) {
-      print(e);
-    }
-    return null;
-  }
+  String getPropertyName(CodeFormat value) => value?.propertyName;
 
   /// This function is Deprecated, [codeFormat.name] instead
   @deprecated
-  String nameOf(CodeFormat value) {
-    return value != null ? value.toString().split(".")[1] : null;
-  }
+  String nameOf(CodeFormat value) => value?.name;
 
   /// Returns a Map of Honeywell's Barcode formats properties enabled by default
   /// according to the List of CodeFormat specified.

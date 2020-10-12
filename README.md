@@ -1,35 +1,33 @@
-# honeywell_scanner 1.0.0+2
+# honeywell_scanner 2.0.0+4
 
 This is a plugin to scan barcodes by using [Honeywell](https://www.honeywellaidc.com/products/barcode-scanners) PDA Android devices.
 
-**Native library version is 1.00.00.0085.**
+**Native library version is 1.00.00.0102.**
 
 ## Description
 
-Honeywell Mobility SDK for Android provides scanning and printing Java libraries for native Android application development. This revision replaces the previous revision 1.00.00.0034.
-Target platform:  Android.
-Programming language: Java
-License: Free
+Supported devices
 
-Supported computers
+```
+CN51
+CK75
+CN75
+CN75e
+CN80
+CN85 
+Dolphin 75e 
+Dolphin CT40 
+Dolphin CT50 
+Dolphin CT60 
+EDA50 
+EDA51
+EDA50K 
+EDA70
+Thor VM1A
+```
+If your device doesn't show up in the list above, give it a try anyway...
 
-      Dolphin CT50 Android 4.4 and Android 6.0
-      Dolphin CT40 Android 7.1.1
-      Dolphin CT60 Android 7.1.1
-      Dolphin CN80 Android 7.1.1
-      Dolphin 75e Android 4.4 and Android 6.0
-      CN51 Android 6.0
-      CK75, CN75 and CN75e Android 6.0
-      EDA50, EDA50K, EDA70 Android 7.1.1
-      EDA51 Android 8.1.0
 
- Supported printers
-
-      Receipt printers – PR2, PR3, PB21, PB31, PB42, PB51, and 6824
-      Label printers - PB22, PB32 and PB50
-Supported external scanners
-
-      Ring scanner for Dolphin 75e
 
 ## How to use
 
@@ -45,15 +43,19 @@ Copy the **honeywell** folder which is inside the example code sources at:
 
 `.../your-flutter-sdk/.pub-cache/hosted/pub.dartlang.org/honeywell_scanner-2.0.0+4/example/android/honeywell`
 
-into your android project module which is going to use this plugin. This step is necessary and crucial because the Honeywell Android library is a bundle .aar which has to be referenced as a prject library to allow the plugin to locate the honeywell.aar.
+into your android project module which is going to use this plugin. This step is necessary and crucial because the Honeywell Android library is a bundle .aar which has to be referenced as a project library.
 
 
 #### Third
+Add this `include ':honeywell'` to your `settings.gradle` in your android project module to allow the plugin to locate the honeywell.aar library.
+
+
+#### Fourth
 
 Add `tools:replace="android:label"` to your **AndroidManifest.xml**, this is required because the **honeywell.aar** library defines an `android:label="@string/app_name"` which conflicts with your project's label resulting in a *Manifest merger failed* error
 
 
-#### Four
+#### Fifth
 To use the honeywell_scanner plugin just:
 
 1. Instantiate:
