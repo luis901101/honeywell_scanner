@@ -6,7 +6,6 @@ export 'package:honeywell_scanner/scanner_callback.dart';
 export 'package:honeywell_scanner/code_format.dart';
 
 class HoneywellScanner {
-
   static const _METHOD_CHANNEL = "honeywellscanner";
   static const _SET_PROPERTIES = "setProperties";
   static const _START_SCANNER = "startScanner";
@@ -25,7 +24,11 @@ class HoneywellScanner {
     this._scannerCallBack = scannerCallBack;
   }
 
-  set scannerCallBack(ScannerCallBack scannerCallBack) => _scannerCallBack = scannerCallBack;
+  set scannerCallBack(ScannerCallBack scannerCallBack) =>
+      _scannerCallBack = scannerCallBack;
+
+  setScannerCallBack(ScannerCallBack scannerCallBack) =>
+      _scannerCallBack = scannerCallBack;
 
   Future _onMethodCall(MethodCall call) {
     try {
@@ -39,9 +42,7 @@ class HoneywellScanner {
         default:
           print(call.arguments);
       }
-    }
-    catch(e)
-    {
+    } catch (e) {
       print(e);
     }
     return null;
@@ -53,7 +54,7 @@ class HoneywellScanner {
   ///
   ///@param code Encapsulates the result of decoding a barcode within an image
   void onDecoded(String code) {
-    if(_scannerCallBack != null) _scannerCallBack.onDecoded(code);
+    if (_scannerCallBack != null) _scannerCallBack.onDecoded(code);
   }
 
   ///Called when error has occurred
@@ -62,14 +63,14 @@ class HoneywellScanner {
   ///
   ///@param error Exception that has been thrown
   void onError(Exception error) {
-    if(_scannerCallBack != null) _scannerCallBack.onError(error);
+    if (_scannerCallBack != null) _scannerCallBack.onError(error);
   }
 
-  Future setProperties(Map<String, dynamic> mapProperties){
+  Future setProperties(Map<String, dynamic> mapProperties) {
     return _channel.invokeMethod(_SET_PROPERTIES, mapProperties);
   }
 
-  Future startScanner(){
+  Future startScanner() {
     return _channel.invokeMethod(_START_SCANNER);
   }
 
@@ -84,6 +85,4 @@ class HoneywellScanner {
   Future stopScanner() {
     return _channel.invokeMethod(_STOP_SCANNER);
   }
-
-
 }

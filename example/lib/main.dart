@@ -13,53 +13,61 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> implements ScannerCallBack{
-  String _scannedCode = 'Empty';
-  String _scannedStatus = 'Stopped';
+class _MyAppState extends State<MyApp> implements ScannerCallBack {
+  String scannedCode = 'Empty';
+  bool scannerEnabled = false;
+  bool scan1DFormats = true;
+  bool scan2DFormats = true;
 
   @override
   void initState() {
     super.initState();
-    widget.honeywellScanner.scannerCallBack = this;
+    widget.honeywellScanner.setScannerCallBack(this);
+    updateScanProperties();
+  }
+
+  updateScanProperties() {
+    List<CodeFormat> codeFormats = [];
+    if (scan1DFormats ?? false)
+      codeFormats.addAll(CodeFormatUtils.ALL_1D_FORMATS);
+    if (scan2DFormats ?? false)
+      codeFormats.addAll(CodeFormatUtils.ALL_2D_FORMATS);
+
+//    codeFormats.add(CodeFormat.AZTEC);
+//    codeFormats.add(CodeFormat.CODABAR);
+//    codeFormats.add(CodeFormat.CODE_39);
+//    codeFormats.add(CodeFormat.CODE_93);
+//    codeFormats.add(CodeFormat.CODE_128);
+//    codeFormats.add(CodeFormat.DATA_MATRIX);
+//    codeFormats.add(CodeFormat.EAN_8);
+//    codeFormats.add(CodeFormat.EAN_13);
+////    codeFormats.add(CodeFormat.ITF);
+//    codeFormats.add(CodeFormat.MAXICODE);
+//    codeFormats.add(CodeFormat.PDF_417);
+//    codeFormats.add(CodeFormat.QR_CODE);
+//    codeFormats.add(CodeFormat.RSS_14);
+//    codeFormats.add(CodeFormat.RSS_EXPANDED);
+//    codeFormats.add(CodeFormat.UPC_A);
+//    codeFormats.add(CodeFormat.UPC_E);
+////    codeFormats.add(CodeFormat.UPC_EAN_EXTENSION);
+
     widget.honeywellScanner.setProperties(
-        CodeFormatUtils.get().getFormatsAsProperties(
-            [CodeFormat.CODE_128, CodeFormat.QR_CODE])
-    );
+        CodeFormatUtils.getAsPropertiesComplement(codeFormats));
   }
 
   @override
   void onDecoded(String result) {
     setState(() {
-      _scannedCode = result;
+      scannedCode = result;
     });
   }
 
   @override
   void onError(Exception error) {
     setState(() {
-      _scannedCode = error.toString();
+      scannedCode = error.toString();
     });
   }
-
-//  // Platform messages are asynchronous, so we initialize in an async method.
-//  Future showPlatformVersion() async {
-//    String platformVersion;
-//    // Platform messages may fail, so we use a try/catch PlatformException.
-//    try {
-//      platformVersion = await HoneywellScanner.platformVersion;
-//    } on PlatformException {
-//      platformVersion = 'Failed to get platform version.';
-//    }
-//
-//    // If the widget was removed from the tree while the asynchronous platform
-//    // message was in flight, we want to discard the reply rather than calling
-//    // setState to update our non-existent appearance.
-//    if (!mounted) return;
-//
-//    setState(() {
-//      _platformVersion = platformVersion;
-//    });
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,24 +79,51 @@ class _MyAppState extends State<MyApp> implements ScannerCallBack{
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Scanner: $_scannedStatus'),
-            Divider(color: Colors.transparent,),
-            Text('Scanned code: $_scannedCode'),
-            Divider(color: Colors.transparent,),
-            RaisedButton(
-              child: Text("Start Scanner"),
-              onPressed: (){
-                widget.honeywellScanner.startScanner();
-                _scannedStatus = "Started";
+            Text('Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
+            style: TextStyle(color: scannerEnabled ? Colors.blue : Colors.red),),
+            Divider(
+              color: Colors.transparent,
+            ),
+            Text('Scanned code: $scannedCode'),
+            Divider(
+              color: Colors.transparent,
+            ),
+            SwitchListTile(
+              title: Text("Scan 1D Codes"),
+              subtitle: Text("like Code-128, Code-39, Code-93, etc"),
+              value: scan1DFormats,
+              onChanged: (value) {
+                scan1DFormats = value;
+                updateScanProperties();
                 setState(() {});
               },
             ),
-            Divider(color: Colors.transparent,),
-            RaisedButton(
+            SwitchListTile(
+              title: Text("Scan 2D Codes"),
+              subtitle: Text("like QR, Data Matrix, Aztec, etc"),
+              value: scan2DFormats,
+              onChanged: (value) {
+                scan2DFormats = value;
+                updateScanProperties();
+                setState(() {});
+              },
+            ),
+            ElevatedButton(
+              child: Text("Start Scanner"),
+              onPressed: () {
+                widget.honeywellScanner.startScanner();
+                scannerEnabled = true;
+                setState(() {});
+              },
+            ),
+            Divider(
+              color: Colors.transparent,
+            ),
+            ElevatedButton(
               child: Text("Stop Scanner"),
-              onPressed: (){
+              onPressed: () {
                 widget.honeywellScanner.stopScanner();
-                _scannedStatus = "Stopped";
+                scannerEnabled = false;
                 setState(() {});
               },
             ),
