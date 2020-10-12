@@ -16,18 +16,6 @@ rootProject.allprojects {
     repositories {
         google()
         jcenter()
-/**
- * The android project which is going to use this plugin library should define flatDir in its
- * gradle allProjects closure, exactly as below
-
-        flatDir {
-            dirs 'libs'
-        }
-
- * Then the honeywell.aar file should be copied to the android/app/libs/ folder inside the
- * android project sources.
- * This will allow the plugin to locate the honeywell.aar library.
- */
     }
 }
 
@@ -51,6 +39,6 @@ android {
 }
 
 dependencies {
-//    implementation 'com.youradeptsolutions:honeywellpda:1.00.00.0085'
-    implementation(name:'honeywell', ext:'aar')
+//    implementation(name:'honeywell', ext:'aar')
+    api project(":honeywell")
 }

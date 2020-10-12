@@ -4,18 +4,14 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8afd1be9-2a49-4949-ab7d-9ed0e35ab749" name="Default" comment="- Support for latest flutter frameworks">
+    <list default="true" id="8afd1be9-2a49-4949-ab7d-9ed0e35ab749" name="Default" comment="- Honeywell sdk lib AAR updated to v1.00.00.0102&#10;- Example project updated to show a more detailed how to use.&#10;- CodeFormatUtils is now an extension of CodeFormat *(breaking change)*">
+      <change afterPath="$PROJECT_DIR$/example/android/honeywell/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/android/honeywell/honeywell.aar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/libs/honeywell.aar" beforeDir="false" afterPath="$PROJECT_DIR$/android/libs/honeywell.aar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/libs/honeywell.aar" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/libs/honeywell.aar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/generated/i18n.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/honeywell_scanner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/honeywell_scanner.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/code_format.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/code_format.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/honeywell_scanner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/honeywell_scanner.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/libs/honeywell.aar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/settings.gradle" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.dart_tool/" />
     <ignored path="$PROJECT_DIR$/.idea/" />
@@ -38,7 +34,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
+            <state relative-caret-position="1540">
               <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -50,20 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/code_format.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2537">
-              <caret line="223" column="9" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/honeywell_scanner.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1360">
-              <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="960">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
             </state>
           </provider>
         </entry>
@@ -77,12 +61,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="140">
-                <caret line="7" selection-start-line="7" selection-end-line="7" />
+              <first_editor relative-caret-position="60">
+                <caret line="3" selection-start-line="3" selection-end-line="3" />
               </first_editor>
               <second_editor>
                 <markdownNavigatorState />
@@ -92,10 +76,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/settings.gradle">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="38" selection-start-column="38" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="90">
+              <first_editor relative-caret-position="600">
                 <caret line="30" selection-start-line="30" selection-end-line="30" />
               </first_editor>
               <second_editor>
@@ -156,6 +158,7 @@
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/example/lib/main.dart" />
         <option value="$PROJECT_DIR$/CHANGELOG.md" />
+        <option value="$PROJECT_DIR$/android/settings.gradle" />
       </list>
     </option>
   </component>
@@ -178,6 +181,45 @@
             <path>
               <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
               <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="example" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="honeywell" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="ios" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="honeywell_scanner" type="b2602c69:ProjectViewProjectNode" />
+              <item name="honeywell_scanner" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -450,7 +492,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602522440957</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- Honeywell sdk lib AAR updated to v1.00.00.0102&#10;- Example project updated to show a more detailed how to use.&#10;- CodeFormatUtils is now an extension of CodeFormat *(breaking change)*">
+      <created>1602535972039</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1602535972039</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -558,7 +607,8 @@
     <MESSAGE value="- gitignore updated to ignore unnecessary files&#10;- libs folder added to git to upload honeywell.aar as part of the sources" />
     <MESSAGE value="- Support for latest flutter frameworks" />
     <MESSAGE value="- **stopScanner** function restores BarcodeScanner to initial properties, this means any custom properties will be replaced with the properties before **startScanner**" />
-    <option name="LAST_COMMIT_MESSAGE" value="- **stopScanner** function restores BarcodeScanner to initial properties, this means any custom properties will be replaced with the properties before **startScanner**" />
+    <MESSAGE value="- Honeywell sdk lib AAR updated to v1.00.00.0102&#10;- Example project updated to show a more detailed how to use.&#10;- CodeFormatUtils is now an extension of CodeFormat *(breaking change)*" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Honeywell sdk lib AAR updated to v1.00.00.0102&#10;- Example project updated to show a more detailed how to use.&#10;- CodeFormatUtils is now an extension of CodeFormat *(breaking change)*" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -572,13 +622,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/smart-push">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
@@ -777,13 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/runConfigurations/example_lib_main_dart.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -836,16 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/honeywell_scanner.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="68" column="9" selection-start-line="68" selection-start-column="9" selection-end-line="68" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../SDK/bin/cache/pkg/sky_engine/lib/core/annotations.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
@@ -860,37 +886,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="90">
-            <caret line="30" selection-start-line="30" selection-end-line="30" />
-          </first_editor>
-          <second_editor>
-            <markdownNavigatorState />
-          </second_editor>
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/code_format.dart">
+    <entry file="file://$PROJECT_DIR$/lib/honeywell_scanner.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2537">
-          <caret line="223" column="9" selection-start-line="223" selection-start-column="9" selection-end-line="223" selection-end-column="9" />
+        <state relative-caret-position="194">
+          <caret line="53" column="5" lean-forward="true" selection-start-line="53" selection-start-column="5" selection-end-line="53" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/example/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
+        <state relative-caret-position="1540">
           <caret line="77" column="10" selection-start-line="77" selection-start-column="10" selection-end-line="77" selection-end-column="10" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/code_format.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
         </state>
       </provider>
     </entry>
@@ -904,8 +923,8 @@
     <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="140">
-            <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <first_editor relative-caret-position="60">
+            <caret line="3" selection-start-line="3" selection-end-line="3" />
           </first_editor>
           <second_editor>
             <markdownNavigatorState />
@@ -915,6 +934,37 @@
       <provider editor-type-id="text-editor">
         <state>
           <caret column="10" selection-start-column="10" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;MarkdownPreviewEditor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="600">
+            <caret line="30" selection-start-line="30" selection-end-line="30" />
+          </first_editor>
+          <second_editor>
+            <markdownNavigatorState />
+          </second_editor>
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="23" column="25" lean-forward="true" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
         </state>
       </provider>
     </entry>
