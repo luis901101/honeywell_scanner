@@ -35,20 +35,72 @@ Supported external scanners
 
 #### First
 ```yaml
-# add this line to your flutter project dependencies
-honeywell_scanner: ^1.0.0+1
+# Add this line to your flutter project dependencies
+honeywell_scanner: ^2.0.0+4
 ```
+and run `flutter pub get` to download the library sources to your pub-cache.
 
 #### Second
-The android project which is going to use this plugin library should define **flatDir** in its gradle allProjects closure, exactly as below:
+Copy the **honeywell** folder which is inside the example code sources at:
 
+`.../your-flutter-sdk/.pub-cache/hosted/pub.dartlang.org/honeywell_scanner-2.0.0+4/example/android/honeywell`
 
-```android
-  flatDir {
-      dirs 'libs'
-  }
-```
+into your android project module which is going to use this plugin. This step is necessary and crucial because the Honeywell Android library is a bundle .aar which has to be referenced as a prject library to allow the plugin to locate the honeywell.aar.
+
 
 #### Third
 
-The honeywell.aar file which is inside the android/libs/ of this plugin should be copied to the android/app/libs/ folder inside your android project sources. This will allow the plugin to locate the honeywell.aar library.
+Add `tools:replace="android:label"` to your **AndroidManifest.xml**, this is required because the **honeywell.aar** library defines an `android:label="@string/app_name"` which conflicts with your project's label resulting in a *Manifest merger failed* error
+
+
+#### Four
+To use the honeywell_scanner plugin just:
+
+1. Instantiate:
+```
+HoneywellScanner honeywellScanner = HoneywellScanner();
+```
+
+2. Set the ScannerCallBack listener:
+```
+honeywellScanner.setScannerCallBack(this);
+```
+
+3. Override the ScannerCallback methods
+
+```
+@override
+  void onDecoded(String result) {
+    setState(() {
+      scannedCode = result;
+    });
+  }
+
+  @override
+  void onError(Exception error) {
+    setState(() {
+      scannedCode = error.toString();
+    });
+  }
+```
+
+3. Set some properties *(optional)* for instance if you want the scanner only scans 2D codes:
+```
+List<CodeFormat> codeFormats = codeFormats.addAll(CodeFormatUtils.ALL_2D_FORMATS);
+honeywellScanner.setProperties( CodeFormatUtils.getAsPropertiesComplement(codeFormats));
+```
+
+4. Start scanner listener, at this point the app will be listening for any scanned code when you press the physical PDA button to scan something:
+```
+honeywellScanner.startScanner();
+```
+
+5. Stop scanner listener, this will release and close the scanner connection:
+```
+honeywellScanner.stopScanner();
+```
+
+6. You can also do a `scanner.pauseScanner()` or `scanner.resumeScanner()` depending on your app life cycle state.
+
+### Note:
+it's recommended to check the example code for a better idea of how to work with this plugin.

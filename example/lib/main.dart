@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements Sc
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Honeywell scanner example'),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
