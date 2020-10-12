@@ -1,14 +1,12 @@
 package com.plugin.flutter.honeywell_scanner;
 
 import android.content.Context;
-
 import com.honeywell.aidc.AidcManager;
 import com.honeywell.aidc.BarcodeFailureEvent;
 import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
 import com.honeywell.aidc.InvalidScannerNameException;
 import com.honeywell.aidc.UnsupportedPropertyException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,13 +15,14 @@ import java.util.Map;
  * Created by krrigan on 10/13/18.
  */
 
-public class HoneywellScannerNative extends HoneywellScanner implements AidcManager.CreatedCallback, BarcodeReader.BarcodeListener
-{
+public class HoneywellScannerNative extends HoneywellScanner implements AidcManager.CreatedCallback,
+        BarcodeReader.BarcodeListener {
 
-    private boolean initialized = false, initializing = false, pendingResume = false;
+    private boolean initialized, initializing, pendingResume;
     private transient AidcManager scannerManager;
     private transient BarcodeReader scanner;
     private transient Map<String, Object> properties;
+    private transient Map<String, Object> initialProperties;
 
     public HoneywellScannerNative(Context context)
     {
@@ -46,21 +45,21 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
         try{
             scannerManager = aidcManager;
             scanner = scannerManager.createBarcodeReader();
-
             // register bar code event listener
             scanner.addBarcodeListener(this);
+            initialProperties = scanner.getAllProperties();
 
             // set the trigger mode to client control
             try {
                 scanner.setProperty(BarcodeReader.PROPERTY_TRIGGER_CONTROL_MODE,
                         BarcodeReader.TRIGGER_CONTROL_MODE_AUTO_CONTROL);
+                scanner.setProperty(BarcodeReader.PROPERTY_DATA_PROCESSOR_LAUNCH_BROWSER, false);
             } catch (UnsupportedPropertyException e) {
                 onError(e);
             }
-            scanner.setProperty(BarcodeReader.PROPERTY_DATA_PROCESSOR_LAUNCH_BROWSER, false);
             // register trigger state change listener
-            // When using Automatic Trigger control do not need to implement the onTriggerEvent function
-            // scanner.addTriggerListener(this);
+            // When using Automatic Trigger control do not need to implement the onTriggerEvent
+            // function scanner.addTriggerListener(this);
 
             if(properties != null) scanner.setProperties(properties);
             initialized = true;
@@ -158,13 +157,25 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
         pendingResume = false;
         try
         {
+            // resetting to initial properties, these are the properties before starting the scanner
+            // and setting custom properties.
+            if (scanner != null)
+                scanner.setProperties(initialProperties);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        try
+        {
             if (scanner != null) {
                 // unregister barcode event listener
                 scanner.removeBarcodeListener(this);
 
                 // unregister trigger state change listener
-                // When using Automatic Trigger control do not need to implement the onTriggerEvent function
-                // scanner.removeTriggerListener(this);
+                // When using Automatic Trigger control do not need to implement the onTriggerEvent
+                // function scanner.removeTriggerListener(this);
 
                 // close BarcodeReader to clean up resources.
                 scanner.close();

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   HoneywellScanner honeywellScanner = HoneywellScanner();
