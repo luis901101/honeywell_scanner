@@ -15,10 +15,10 @@ class HoneywellScanner {
   static const _ON_DECODED = "onDecoded";
   static const _ON_ERROR = "onError";
 
-  MethodChannel _channel;
-  ScannerCallBack _scannerCallBack;
+  late MethodChannel _channel;
+  ScannerCallBack? _scannerCallBack;
 
-  HoneywellScanner({ScannerCallBack scannerCallBack}) {
+  HoneywellScanner({ScannerCallBack? scannerCallBack}) {
     _channel = const MethodChannel(_METHOD_CHANNEL);
     _channel.setMethodCallHandler(_onMethodCall);
     this._scannerCallBack = scannerCallBack;
@@ -30,7 +30,7 @@ class HoneywellScanner {
   setScannerCallBack(ScannerCallBack scannerCallBack) =>
       _scannerCallBack = scannerCallBack;
 
-  Future _onMethodCall(MethodCall call) {
+  Future<void> _onMethodCall(MethodCall call) async {
     try {
       switch (call.method) {
         case _ON_DECODED:
@@ -45,7 +45,6 @@ class HoneywellScanner {
     } catch (e) {
       print(e);
     }
-    return null;
   }
 
   ///Called when decoder has successfully decoded the code
@@ -53,8 +52,8 @@ class HoneywellScanner {
   ///Note that this method always called on a worker thread
   ///
   ///@param code Encapsulates the result of decoding a barcode within an image
-  void onDecoded(String code) {
-    if (_scannerCallBack != null) _scannerCallBack.onDecoded(code);
+  void onDecoded(String? code) {
+    _scannerCallBack?.onDecoded(code);
   }
 
   ///Called when error has occurred
@@ -63,7 +62,7 @@ class HoneywellScanner {
   ///
   ///@param error Exception that has been thrown
   void onError(Exception error) {
-    if (_scannerCallBack != null) _scannerCallBack.onError(error);
+    _scannerCallBack?.onError(error);
   }
 
   Future setProperties(Map<String, dynamic> mapProperties) {

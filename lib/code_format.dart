@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/foundation.dart';
 
 enum CodeFormat {
@@ -48,30 +49,23 @@ enum CodeFormat {
 }
 
 extension CodeFormatUtils on CodeFormat {
-  static final String _CODE_FORMAT_PROPERTY_AZTEC_ENABLED = "DEC_AZTEC_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_CODABAR_ENABLED =
-      "DEC_CODABAR_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_CODE_39_ENABLED =
-      "DEC_CODE39_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_CODE_93_ENABLED =
-      "DEC_CODE93_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_CODE_128_ENABLED =
-      "DEC_CODE128_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_DATAMATRIX_ENABLED =
-      "DEC_DATAMATRIX_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_EAN_8_ENABLED = "DEC_EAN8_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_EAN_13_ENABLED =
-      "DEC_EAN13_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_MAXICODE_ENABLED =
-      "DEC_MAXICODE_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_PDF_417_ENABLED =
-      "DEC_PDF417_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_QR_CODE_ENABLED = "DEC_QR_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_RSS_ENABLED = "DEC_RSS_14_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_RSS_EXPANDED_ENABLED =
-      "DEC_RSS_EXPANDED_ENABLED";
-  static final String _CODE_FORMAT_PROPERTY_UPC_A_ENABLE = "DEC_UPCA_ENABLE";
-  static final String _CODE_FORMAT_PROPERTY_UPC_E_ENABLED = "DEC_UPCE0_ENABLED";
+  static const _CODE_FORMAT_PROPERTY_AZTEC_ENABLED = 'DEC_AZTEC_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_CODABAR_ENABLED = 'DEC_CODABAR_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_CODE_39_ENABLED = 'DEC_CODE39_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_CODE_93_ENABLED = 'DEC_CODE93_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_CODE_128_ENABLED = 'DEC_CODE128_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_DATAMATRIX_ENABLED =
+      'DEC_DATAMATRIX_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_EAN_8_ENABLED = 'DEC_EAN8_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_EAN_13_ENABLED = 'DEC_EAN13_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_MAXICODE_ENABLED = 'DEC_MAXICODE_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_PDF_417_ENABLED = 'DEC_PDF417_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_QR_CODE_ENABLED = 'DEC_QR_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_RSS_ENABLED = 'DEC_RSS_14_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_RSS_EXPANDED_ENABLED =
+      'DEC_RSS_EXPANDED_ENABLED';
+  static const _CODE_FORMAT_PROPERTY_UPC_A_ENABLE = 'DEC_UPCA_ENABLE';
+  static const _CODE_FORMAT_PROPERTY_UPC_E_ENABLED = 'DEC_UPCE0_ENABLED';
 
   /// All supported code formats
   static const List<CodeFormat> ALL_FORMATS = CodeFormat.values;
@@ -119,7 +113,7 @@ extension CodeFormatUtils on CodeFormat {
 
   String get name => describeEnum(this);
 
-  String get propertyName {
+  String? get propertyName {
     try {
       switch (this) {
         case CodeFormat.AZTEC:
@@ -160,52 +154,22 @@ extension CodeFormatUtils on CodeFormat {
     return null;
   }
 
-  static CodeFormat valueOf(String name) => CodeFormat.values
-      .firstWhere((value) => value.name == name, orElse: () => null);
-
-  /// This function is Deprecated, [codeFormat.propertyName] instead
-  @deprecated
-  String getPropertyName(CodeFormat value) => value?.propertyName;
-
-  /// This function is Deprecated, [codeFormat.name] instead
-  @deprecated
-  String nameOf(CodeFormat value) => value?.name;
-
-  /// Returns a Map of Honeywell's Barcode formats properties enabled by default
-  /// according to the List of CodeFormat specified.
-  /// [codeFormats] the List of CodeFormat enums to be converted to Honeywell properties
-  /// IMPORTANT:
-  /// - The codeFormats not specified in the [codeFormats] list will be set to disabled
-  /// - Empty codeFormats list means no properties at all
-  /// This function is Deprecated, use [getAsPropertiesComplement(...)] instead
-  @deprecated
-  static Map<String, dynamic> getFormatsAsProperties(
-      final List<CodeFormat> codeFormats) {
-    if (codeFormats?.isEmpty ?? true) return {};
-
-    Map<String, dynamic> mapProperties = {};
-    codeFormats.forEach((codeFormat) {
-      mapProperties[codeFormat?.propertyName] = true;
-    });
-    CodeFormat.values.forEach((codeFormat) {
-      String propertyName = codeFormat?.propertyName;
-      if (propertyName != null)
-        mapProperties[propertyName] = mapProperties.containsKey(propertyName);
-    });
-    return mapProperties;
-  }
+  static CodeFormat? valueOf(String name) =>
+      CodeFormat.values.firstWhereOrNull((value) => value.name == name);
 
   /// Returns a Map of Honeywell's Barcode formats properties according to the
   /// List of CodeFormat specified and the [enabled] value which is true by default.
   /// [codeFormats] the List of CodeFormat enums to be converted to Honeywell properties
   /// [enabled] the value to be set to the format property, true or false
-  static Map<String, dynamic> getAsProperties(final List<CodeFormat> codeFormats,
+  static Map<String, dynamic> getAsProperties(
+      final List<CodeFormat> codeFormats,
       {bool enabled = true}) {
-    if (codeFormats?.isEmpty ?? true) return {};
-    enabled ??= true;
+    if (codeFormats.isEmpty) return {};
     Map<String, dynamic> mapProperties = {};
-    codeFormats.forEach(
-        (codeFormat) => mapProperties[codeFormat?.propertyName] = enabled);
+    codeFormats.forEach((codeFormat) {
+      if (codeFormat.propertyName != null)
+        mapProperties[codeFormat.propertyName!] = enabled;
+    });
     return mapProperties;
   }
 
@@ -217,15 +181,13 @@ extension CodeFormatUtils on CodeFormat {
   /// [enabled] the value to be set to the format property, true or false.
   /// IMPORTANT:
   /// - The codeFormats not specified in the [codeFormats] list will be set to the opposite of enabled like !enabled
-  static Map<String, dynamic> getAsPropertiesComplement(List<CodeFormat> codeFormats,
+  static Map<String, dynamic> getAsPropertiesComplement(
+      List<CodeFormat> codeFormats,
       {bool enabled = true}) {
-    codeFormats ??= [];
-    enabled ??= true;
-
     Map<String, dynamic> mapProperties =
         getAsProperties(codeFormats, enabled: enabled);
     CodeFormat.values.forEach((codeFormat) {
-      String propertyName = codeFormat?.propertyName;
+      String? propertyName = codeFormat.propertyName;
       if (propertyName != null && !mapProperties.containsKey(propertyName))
         mapProperties[propertyName] = !enabled;
     });

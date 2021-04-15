@@ -1,3 +1,7 @@
+## 3.0.0+5 (2021-04-15)
+### Added
+- Support for null-safety
+
 ## 2.0.0+4 (2020-10-12)
 ### Changed
 - Honeywell sdk lib AAR updated to v1.00.00.0102

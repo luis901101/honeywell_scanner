@@ -12,9 +12,11 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements ScannerCallBack{
+class _MyAppState extends State<MyApp>
+    with WidgetsBindingObserver
+    implements ScannerCallBack {
   HoneywellScanner honeywellScanner = HoneywellScanner();
-  String scannedCode = 'Empty';
+  String? scannedCode = 'Empty';
   bool scannerEnabled = false;
   bool scan1DFormats = true;
   bool scan2DFormats = true;
@@ -22,17 +24,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements Sc
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance!.addObserver(this);
     honeywellScanner.setScannerCallBack(this);
     updateScanProperties();
   }
 
   updateScanProperties() {
     List<CodeFormat> codeFormats = [];
-    if (scan1DFormats ?? false)
-      codeFormats.addAll(CodeFormatUtils.ALL_1D_FORMATS);
-    if (scan2DFormats ?? false)
-      codeFormats.addAll(CodeFormatUtils.ALL_2D_FORMATS);
+    if (scan1DFormats) codeFormats.addAll(CodeFormatUtils.ALL_1D_FORMATS);
+    if (scan2DFormats) codeFormats.addAll(CodeFormatUtils.ALL_2D_FORMATS);
 
 //    codeFormats.add(CodeFormat.AZTEC);
 //    codeFormats.add(CodeFormat.CODABAR);
@@ -52,12 +52,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements Sc
 //    codeFormats.add(CodeFormat.UPC_E);
 ////    codeFormats.add(CodeFormat.UPC_EAN_EXTENSION);
 
-    honeywellScanner.setProperties(
-        CodeFormatUtils.getAsPropertiesComplement(codeFormats));
+    honeywellScanner
+        .setProperties(CodeFormatUtils.getAsPropertiesComplement(codeFormats));
   }
 
   @override
-  void onDecoded(String result) {
+  void onDecoded(String? result) {
     setState(() {
       scannedCode = result;
     });
@@ -80,8 +80,11 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements Sc
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
-            style: TextStyle(color: scannerEnabled ? Colors.blue : Colors.red),),
+            Text(
+              'Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
+              style:
+                  TextStyle(color: scannerEnabled ? Colors.blue : Colors.red),
+            ),
             Divider(
               color: Colors.transparent,
             ),
@@ -133,23 +136,23 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements Sc
       ),
     );
   }
-  
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    if(state == null) return;
-    switch(state){
+    switch (state) {
       case AppLifecycleState.resumed:
-        if(honeywellScanner != null) honeywellScanner.resumeScanner();
+        honeywellScanner.resumeScanner();
         break;
       case AppLifecycleState.inactive:
-        if(honeywellScanner != null) honeywellScanner.pauseScanner();
+        honeywellScanner.pauseScanner();
         break;
-      case AppLifecycleState.paused://AppLifecycleState.paused is used as stopped state because deactivate() works more as a pause for lifecycle
-        if(honeywellScanner != null) honeywellScanner.pauseScanner();
+      case AppLifecycleState
+          .paused: //AppLifecycleState.paused is used as stopped state because deactivate() works more as a pause for lifecycle
+        honeywellScanner.pauseScanner();
         break;
       case AppLifecycleState.detached:
-        if(honeywellScanner != null) honeywellScanner.pauseScanner();
+        honeywellScanner.pauseScanner();
         break;
       default:
         break;
@@ -158,7 +161,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver implements Sc
 
   @override
   void dispose() {
-    if(honeywellScanner != null) honeywellScanner.stopScanner();
+    honeywellScanner.stopScanner();
     super.dispose();
   }
 }
