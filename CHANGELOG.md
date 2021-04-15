@@ -1,3 +1,8 @@
+## 3.0.1+6 (2021-04-15)
+### Changed
+- Android gradle plugin updated
+- Android compileSdkVersion updated
+
 ## 3.0.0+5 (2021-04-15)
 ### Added
 - Support for null-safety
