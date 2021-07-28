@@ -10,7 +10,6 @@ import com.honeywell.aidc.UnsupportedPropertyException;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Created by krrigan on 10/13/18.
  */
@@ -18,7 +17,7 @@ import java.util.Map;
 public class HoneywellScannerNative extends HoneywellScanner implements AidcManager.CreatedCallback,
         BarcodeReader.BarcodeListener {
 
-    private boolean initialized, initializing, pendingResume;
+    private boolean initialized, initializing, pendingResume, supported;
     private transient AidcManager scannerManager;
     private transient BarcodeReader scanner;
     private transient Map<String, Object> properties;
@@ -29,8 +28,12 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
         pendingResume = false;
         initialized = false;
         initializing = false;
+        supported = false;
         init();
     }
+    
+    @Override
+    public boolean isSupported() { return supported; }
 
     private void init()
     {
@@ -42,6 +45,7 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
     public void onCreated(AidcManager aidcManager)
     {
         try{
+            supported = true;
             scannerManager = aidcManager;
             scanner = scannerManager.createBarcodeReader();
             // register bar code event listener
@@ -65,9 +69,6 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
             if(pendingResume) resumeScanner();
         }
         catch (InvalidScannerNameException e){
-            onError(e);
-        }
-        catch (Exception e){
             onError(e);
         }
     }

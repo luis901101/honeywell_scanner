@@ -5,30 +5,20 @@ import android.os.Handler;
 
 import java.util.Map;
 
+import androidx.annotation.NonNull;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
-
-/**
- * Created by luis901101 on 05/30/19.
- */
 
 /**
  * HoneywellScannerPlugin
  */
-public class HoneywellScannerPlugin implements MethodCallHandler, ScannerCallBack
+public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler, ScannerCallBack
 {
-    /**
-     * Plugin registration.
-     */
-    public static void registerWith(Registrar registrar)
-    {
-        new HoneywellScannerPlugin(registrar);
-    }
-
     private static final String _METHOD_CHANNEL = "honeywellscanner";
+    private static final String _IS_SUPPORTED = "isSupported";
     private static final String _SET_PROPERTIES = "setProperties";
     private static final String _START_SCANNER = "startScanner";
     private static final String _RESUME_SCANNER = "resumeScanner";
@@ -37,17 +27,26 @@ public class HoneywellScannerPlugin implements MethodCallHandler, ScannerCallBac
     private static final String _ON_DECODED = "onDecoded";
     private static final String _ON_ERROR = "onError";
 
-    private Handler handler;
+    private final Handler handler;
     private MethodChannel channel;
     private HoneywellScanner scanner;
 
-    public HoneywellScannerPlugin(Registrar registrar)
-    {
-        handler = new Handler();
-        Context context = registrar.context();
-        channel = new MethodChannel(registrar.messenger(), _METHOD_CHANNEL);
+    @Override
+    public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+        Context context = flutterPluginBinding.getApplicationContext();
+        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), _METHOD_CHANNEL);
         channel.setMethodCallHandler(this);
         (scanner = new HoneywellScannerNative(context)).setScannerCallBack(this);
+    }
+
+    @Override
+    public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+        if(channel != null) channel.setMethodCallHandler(null);
+    }
+
+    public HoneywellScannerPlugin()
+    {
+        handler = new Handler();
     }
 
     private void scannerNotInitialized(Result result){
@@ -56,12 +55,17 @@ public class HoneywellScannerPlugin implements MethodCallHandler, ScannerCallBac
 
     @SuppressWarnings("unchecked")
     @Override
-    public void onMethodCall(MethodCall call, Result result)
+    public void onMethodCall(@NonNull MethodCall call, @NonNull Result result)
     {
         try
         {
             switch(call.method)
             {
+                case _IS_SUPPORTED:
+                    if(scanner != null)
+                        result.success(scanner.isSupported());
+                    else scannerNotInitialized(result);
+                    break;
                 case _SET_PROPERTIES:
                     if(scanner != null){
                         scanner.setProperties((Map<String, Object>) call.arguments);
@@ -70,28 +74,24 @@ public class HoneywellScannerPlugin implements MethodCallHandler, ScannerCallBac
                     break;
 
                 case _START_SCANNER:
-                    if(scanner != null){
-                        scanner.startScanner();
-                        result.success(true);
-                    } else scannerNotInitialized(result);
+                    if(scanner != null)
+                        result.success(scanner.startScanner());
+                    else scannerNotInitialized(result);
                     break;
                 case _RESUME_SCANNER:
-                    if(scanner != null){
-                        scanner.resumeScanner();
-                        result.success(true);
-                    } else scannerNotInitialized(result);
+                    if(scanner != null)
+                        result.success(scanner.resumeScanner());
+                    else scannerNotInitialized(result);
                     break;
                 case _PAUSE_SCANNER:
-                    if(scanner != null){
-                        scanner.pauseScanner();
-                        result.success(true);
-                    } else scannerNotInitialized(result);
+                    if(scanner != null)
+                        result.success(scanner.pauseScanner());
+                    else scannerNotInitialized(result);
                     break;
                 case _STOP_SCANNER:
-                    if(scanner != null){
-                        scanner.stopScanner();
-                        result.success(true);
-                    } else scannerNotInitialized(result);
+                    if(scanner != null)
+                        result.success(scanner.stopScanner());
+                    else scannerNotInitialized(result);
                     break;
                 default:
                     result.notImplemented();

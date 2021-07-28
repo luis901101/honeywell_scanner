@@ -3,6 +3,9 @@
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -19,11 +22,30 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8afd1be9-2a49-4949-ab7d-9ed0e35ab749" name="Default" comment="- Android gradle plugin updated&#10;- Android compileSdkVersion updated">
+    <list default="true" id="8afd1be9-2a49-4949-ab7d-9ed0e35ab749" name="Default" comment="- Example android gradle confs updated">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScanner.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScanner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScannerBroadcasts.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScannerBroadcasts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScannerNative.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScannerNative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScannerPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/plugin/flutter/honeywell_scanner/HoneywellScannerPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/honeywell_scanner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/honeywell_scanner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/scanner_callback.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/scanner_callback.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,14 +55,9 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[19101B147D]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@19101B147D]" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
-    <option name="width" value="1440" />
-    <option name="height" value="877" />
   </component>
   <component name="ProjectId" id="1rDICsl1jtEgHYWCrt5PB5y7XyY" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -97,6 +114,7 @@
       <option name="ARTIFACT_NAME" value="" />
       <option name="PM_INSTALL_OPTIONS" value="" />
       <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
       <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
       <option name="ACTIVITY_EXTRA_FLAGS" value="" />
       <option name="MODE" value="default_activity" />
@@ -246,6 +264,7 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -355,7 +374,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618510869980</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- Example android gradle confs updated">
+      <created>1618517313394</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1618517313394</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -372,7 +398,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -413,76 +451,73 @@
     <MESSAGE value="- README.md corrected" />
     <MESSAGE value="- Support for null-safety" />
     <MESSAGE value="- Android gradle plugin updated&#10;- Android compileSdkVersion updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Android gradle plugin updated&#10;- Android compileSdkVersion updated" />
+    <MESSAGE value="- Example android gradle confs updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Example android gradle confs updated" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1494" height="592" key="GridCell.Tab.0.bottom" timestamp="1618515183057">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.0.bottom" timestamp="1627489413610">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.0.bottom/0.23.1536.937@0.23.1536.937" timestamp="1618515183057" />
-    <state width="1494" height="592" key="GridCell.Tab.0.center" timestamp="1618515183057">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.0.bottom/0.25.1536.935@0.25.1536.935" timestamp="1627489413610" />
+    <state width="1494" height="440" key="GridCell.Tab.0.center" timestamp="1627489413609">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.0.center/0.23.1536.937@0.23.1536.937" timestamp="1618515183057" />
-    <state width="1494" height="592" key="GridCell.Tab.0.left" timestamp="1618515183057">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.0.center/0.25.1536.935@0.25.1536.935" timestamp="1627489413609" />
+    <state width="1494" height="440" key="GridCell.Tab.0.left" timestamp="1627489413609">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.0.left/0.23.1536.937@0.23.1536.937" timestamp="1618515183057" />
-    <state width="1494" height="592" key="GridCell.Tab.0.right" timestamp="1618515183057">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.0.left/0.25.1536.935@0.25.1536.935" timestamp="1627489413609" />
+    <state width="1494" height="440" key="GridCell.Tab.0.right" timestamp="1627489413610">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.0.right/0.23.1536.937@0.23.1536.937" timestamp="1618515183057" />
-    <state width="1494" height="592" key="GridCell.Tab.1.bottom" timestamp="1618515183055">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.0.right/0.25.1536.935@0.25.1536.935" timestamp="1627489413610" />
+    <state width="1494" height="440" key="GridCell.Tab.1.bottom" timestamp="1627489413607">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.1.bottom/0.23.1536.937@0.23.1536.937" timestamp="1618515183055" />
-    <state width="1494" height="592" key="GridCell.Tab.1.center" timestamp="1618515183055">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.1.bottom/0.25.1536.935@0.25.1536.935" timestamp="1627489413607" />
+    <state width="1494" height="440" key="GridCell.Tab.1.center" timestamp="1627489413606">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.1.center/0.23.1536.937@0.23.1536.937" timestamp="1618515183055" />
-    <state width="1494" height="592" key="GridCell.Tab.1.left" timestamp="1618515183054">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.1.center/0.25.1536.935@0.25.1536.935" timestamp="1627489413606" />
+    <state width="1494" height="440" key="GridCell.Tab.1.left" timestamp="1627489413606">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.1.left/0.23.1536.937@0.23.1536.937" timestamp="1618515183054" />
-    <state width="1494" height="592" key="GridCell.Tab.1.right" timestamp="1618515183055">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.1.left/0.25.1536.935@0.25.1536.935" timestamp="1627489413606" />
+    <state width="1494" height="440" key="GridCell.Tab.1.right" timestamp="1627489413607">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.1.right/0.23.1536.937@0.23.1536.937" timestamp="1618515183055" />
-    <state width="1494" height="592" key="GridCell.Tab.2.bottom" timestamp="1618515183056">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.1.right/0.25.1536.935@0.25.1536.935" timestamp="1627489413607" />
+    <state width="1494" height="440" key="GridCell.Tab.2.bottom" timestamp="1627489413608">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.2.bottom/0.23.1536.937@0.23.1536.937" timestamp="1618515183056" />
-    <state width="1494" height="592" key="GridCell.Tab.2.center" timestamp="1618515183056">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.2.bottom/0.25.1536.935@0.25.1536.935" timestamp="1627489413608" />
+    <state width="1494" height="440" key="GridCell.Tab.2.center" timestamp="1627489413608">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.2.center/0.23.1536.937@0.23.1536.937" timestamp="1618515183056" />
-    <state width="1494" height="592" key="GridCell.Tab.2.left" timestamp="1618515183056">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.2.center/0.25.1536.935@0.25.1536.935" timestamp="1627489413608" />
+    <state width="1494" height="440" key="GridCell.Tab.2.left" timestamp="1627489413607">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.2.left/0.23.1536.937@0.23.1536.937" timestamp="1618515183056" />
-    <state width="1494" height="592" key="GridCell.Tab.2.right" timestamp="1618515183056">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.2.left/0.25.1536.935@0.25.1536.935" timestamp="1627489413607" />
+    <state width="1494" height="440" key="GridCell.Tab.2.right" timestamp="1627489413608">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.2.right/0.23.1536.937@0.23.1536.937" timestamp="1618515183056" />
-    <state width="1494" height="592" key="GridCell.Tab.3.bottom" timestamp="1618515183057">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.2.right/0.25.1536.935@0.25.1536.935" timestamp="1627489413608" />
+    <state width="1494" height="440" key="GridCell.Tab.3.bottom" timestamp="1627489413609">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.3.bottom/0.23.1536.937@0.23.1536.937" timestamp="1618515183057" />
-    <state width="1494" height="592" key="GridCell.Tab.3.center" timestamp="1618515183056">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.3.bottom/0.25.1536.935@0.25.1536.935" timestamp="1627489413609" />
+    <state width="1494" height="440" key="GridCell.Tab.3.center" timestamp="1627489413609">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.3.center/0.23.1536.937@0.23.1536.937" timestamp="1618515183056" />
-    <state width="1494" height="592" key="GridCell.Tab.3.left" timestamp="1618515183056">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.3.center/0.25.1536.935@0.25.1536.935" timestamp="1627489413609" />
+    <state width="1494" height="440" key="GridCell.Tab.3.left" timestamp="1627489413608">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.3.left/0.23.1536.937@0.23.1536.937" timestamp="1618515183056" />
-    <state width="1494" height="592" key="GridCell.Tab.3.right" timestamp="1618515183057">
-      <screen x="0" y="23" width="1536" height="937" />
+    <state width="1494" height="440" key="GridCell.Tab.3.left/0.25.1536.935@0.25.1536.935" timestamp="1627489413608" />
+    <state width="1494" height="440" key="GridCell.Tab.3.right" timestamp="1627489413609">
+      <screen x="0" y="25" width="1536" height="935" />
     </state>
-    <state width="1494" height="592" key="GridCell.Tab.3.right/0.23.1536.937@0.23.1536.937" timestamp="1618515183057" />
-    <state width="600" height="428" key="javadoc.popup" timestamp="1618507845870">
-      <screen x="0" y="23" width="1536" height="937" />
-    </state>
-    <state width="600" height="428" key="javadoc.popup/0.23.1536.937@0.23.1536.937" timestamp="1618507845870" />
+    <state width="1494" height="440" key="GridCell.Tab.3.right/0.25.1536.935@0.25.1536.935" timestamp="1627489413609" />
   </component>
 </project>

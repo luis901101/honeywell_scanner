@@ -20,16 +20,23 @@ class _MyAppState extends State<MyApp>
   bool scannerEnabled = false;
   bool scan1DFormats = true;
   bool scan2DFormats = true;
+  bool isDeviceSupported = false;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
     honeywellScanner.setScannerCallBack(this);
-    updateScanProperties();
+    init();
   }
 
-  updateScanProperties() {
+  Future<void> init() async {
+    updateScanProperties();
+    isDeviceSupported = await honeywellScanner.isSupported();
+    if(mounted) setState(() {});
+  }
+
+  void updateScanProperties() {
     List<CodeFormat> codeFormats = [];
     if (scan1DFormats) codeFormats.addAll(CodeFormatUtils.ALL_1D_FORMATS);
     if (scan2DFormats) codeFormats.addAll(CodeFormatUtils.ALL_2D_FORMATS);
@@ -81,17 +88,19 @@ class _MyAppState extends State<MyApp>
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
+              'Device supported: $isDeviceSupported',
+              style:
+                TextStyle(color: isDeviceSupported ? Colors.green : Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 8),
+            Text(
               'Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
               style:
-                  TextStyle(color: scannerEnabled ? Colors.blue : Colors.red),
+                  TextStyle(color: scannerEnabled ? Colors.blue : Colors.orange),
             ),
-            Divider(
-              color: Colors.transparent,
-            ),
+            SizedBox(height: 8),
             Text('Scanned code: $scannedCode'),
-            Divider(
-              color: Colors.transparent,
-            ),
+            SizedBox(height: 8),
             SwitchListTile(
               title: Text("Scan 1D Codes"),
               subtitle: Text("like Code-128, Code-39, Code-93, etc"),
@@ -114,21 +123,17 @@ class _MyAppState extends State<MyApp>
             ),
             ElevatedButton(
               child: Text("Start Scanner"),
-              onPressed: () {
-                honeywellScanner.startScanner();
-                scannerEnabled = true;
-                setState(() {});
+              onPressed: () async {
+                if(await honeywellScanner.startScanner())
+                  setState(() {scannerEnabled = true;});
               },
             ),
-            Divider(
-              color: Colors.transparent,
-            ),
+            SizedBox(height: 8),
             ElevatedButton(
               child: Text("Stop Scanner"),
-              onPressed: () {
-                honeywellScanner.stopScanner();
-                scannerEnabled = false;
-                setState(() {});
+              onPressed: () async {
+                if(await honeywellScanner.stopScanner())
+                  setState(() {scannerEnabled = false;});
               },
             ),
           ],

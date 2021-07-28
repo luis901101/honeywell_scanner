@@ -1,3 +1,11 @@
+## 3.1.1+8 (2021-07-28)
+### Fixed
+- `Future<bool> isSupported()` validation added to avoid platform plugin exceptions on any other platform different than Android.
+
+## 3.1.0+7 (2021-07-28)
+### Added
+- `Future<bool> isSupported()` function added to know if running device is supported by honeywell scanner.
+
 ## 3.0.1+6 (2021-04-15)
 ### Changed
 - Android gradle plugin updated

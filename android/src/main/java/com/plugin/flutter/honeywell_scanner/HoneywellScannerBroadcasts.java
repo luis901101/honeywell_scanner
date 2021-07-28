@@ -127,17 +127,22 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
     }
 
 
+    private boolean supported;
     private ScanBroadcastReceiver scanBroadcastReceiver;
     private IntentFilter intentFilter;
     private Bundle properties;
     private boolean isOpened;
 
-    public HoneywellScannerBroadcasts(Context context, Context context1)
+    public HoneywellScannerBroadcasts(Context context)
     {
         super(context);
+        supported = true;
         init();
     }
 
+    @Override
+    public boolean isSupported() { return supported; }
+    
     private void initProperties(){
         properties = new Bundle();
         properties.putBoolean(Constants.PROPERTY_AZTEC_ENABLED, true);
@@ -168,9 +173,9 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
             Object value = entry.getValue();
             if(value == null) continue;
             if(value instanceof String) properties.putString(entry.getKey(), String.valueOf(value));
-            if(value instanceof Boolean) properties.putBoolean(entry.getKey(), Boolean.valueOf(value.toString()));
-            if(value instanceof Integer) properties.putInt(entry.getKey(), Integer.valueOf(value.toString()));
-            if(value instanceof Long) properties.putLong(entry.getKey(), Long.valueOf(value.toString()));
+            if(value instanceof Boolean) properties.putBoolean(entry.getKey(), (Boolean) value);
+            if(value instanceof Integer) properties.putInt(entry.getKey(), (Integer) value);
+            if(value instanceof Long) properties.putLong(entry.getKey(), (Long) value);
         }
     }
 

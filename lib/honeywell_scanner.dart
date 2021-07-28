@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:honeywell_scanner/scanner_callback.dart';
 
@@ -7,6 +9,7 @@ export 'package:honeywell_scanner/code_format.dart';
 
 class HoneywellScanner {
   static const _METHOD_CHANNEL = "honeywellscanner";
+  static const _IS_SUPPORTED = "isSupported";
   static const _SET_PROPERTIES = "setProperties";
   static const _START_SCANNER = "startScanner";
   static const _RESUME_SCANNER = "resumeScanner";
@@ -15,11 +18,10 @@ class HoneywellScanner {
   static const _ON_DECODED = "onDecoded";
   static const _ON_ERROR = "onError";
 
-  late MethodChannel _channel;
+  static const MethodChannel _channel = const MethodChannel(_METHOD_CHANNEL);
   ScannerCallBack? _scannerCallBack;
 
   HoneywellScanner({ScannerCallBack? scannerCallBack}) {
-    _channel = const MethodChannel(_METHOD_CHANNEL);
     _channel.setMethodCallHandler(_onMethodCall);
     this._scannerCallBack = scannerCallBack;
   }
@@ -27,8 +29,8 @@ class HoneywellScanner {
   set scannerCallBack(ScannerCallBack scannerCallBack) =>
       _scannerCallBack = scannerCallBack;
 
-  setScannerCallBack(ScannerCallBack scannerCallBack) =>
-      _scannerCallBack = scannerCallBack;
+  void setScannerCallBack(ScannerCallBack scannerCallBack) =>
+      this.scannerCallBack = scannerCallBack;
 
   Future<void> _onMethodCall(MethodCall call) async {
     try {
@@ -65,23 +67,28 @@ class HoneywellScanner {
     _scannerCallBack?.onError(error);
   }
 
-  Future setProperties(Map<String, dynamic> mapProperties) {
+  Future<bool> isSupported() async {
+    if(kIsWeb || !Platform.isAndroid) return false;
+    return await _channel.invokeMethod<bool>(_IS_SUPPORTED) ?? false;
+  }
+
+  Future<void> setProperties(Map<String, dynamic> mapProperties) {
     return _channel.invokeMethod(_SET_PROPERTIES, mapProperties);
   }
 
-  Future startScanner() {
-    return _channel.invokeMethod(_START_SCANNER);
+  Future<bool> startScanner() async {
+    return await _channel.invokeMethod<bool>(_START_SCANNER) ?? false;
   }
 
-  Future resumeScanner() {
-    return _channel.invokeMethod(_RESUME_SCANNER);
+  Future<bool> resumeScanner() async {
+    return await _channel.invokeMethod(_RESUME_SCANNER) ?? false;
   }
 
-  Future pauseScanner() {
-    return _channel.invokeMethod(_PAUSE_SCANNER);
+  Future<bool> pauseScanner() async {
+    return await _channel.invokeMethod(_PAUSE_SCANNER) ?? false;
   }
 
-  Future stopScanner() {
-    return _channel.invokeMethod(_STOP_SCANNER);
+  Future<bool> stopScanner() async {
+    return await _channel.invokeMethod(_STOP_SCANNER) ?? false;
   }
 }

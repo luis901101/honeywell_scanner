@@ -49,6 +49,7 @@ public abstract class HoneywellScanner implements ScannerCallBack
         if(scannerCallBack != null) scannerCallBack.onError(error);
     }
 
+    public abstract boolean isSupported();
     public abstract void setProperties(Map<String, Object> mapProperties);
     public abstract boolean startScanner();
     public abstract boolean resumeScanner();
