@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/foundation.dart';
 
 enum CodeFormat {
@@ -154,8 +153,12 @@ extension CodeFormatUtils on CodeFormat {
     return null;
   }
 
-  static CodeFormat? valueOf(String name) =>
-      CodeFormat.values.firstWhereOrNull((value) => value.name == name);
+  static CodeFormat? valueOf(String name) {
+    for (final value in CodeFormat.values) {
+      if (value.name == name) return value;
+    }
+    return null;
+  }
 
   /// Returns a Map of Honeywell's Barcode formats properties according to the
   /// List of CodeFormat specified and the [enabled] value which is true by default.
@@ -166,10 +169,11 @@ extension CodeFormatUtils on CodeFormat {
       {bool enabled = true}) {
     if (codeFormats.isEmpty) return {};
     Map<String, dynamic> mapProperties = {};
-    codeFormats.forEach((codeFormat) {
-      if (codeFormat.propertyName != null)
+    for (var codeFormat in codeFormats) {
+      if (codeFormat.propertyName != null) {
         mapProperties[codeFormat.propertyName!] = enabled;
-    });
+      }
+    }
     return mapProperties;
   }
 
@@ -186,11 +190,12 @@ extension CodeFormatUtils on CodeFormat {
       {bool enabled = true}) {
     Map<String, dynamic> mapProperties =
         getAsProperties(codeFormats, enabled: enabled);
-    CodeFormat.values.forEach((codeFormat) {
+    for (var codeFormat in CodeFormat.values) {
       String? propertyName = codeFormat.propertyName;
-      if (propertyName != null && !mapProperties.containsKey(propertyName))
+      if (propertyName != null && !mapProperties.containsKey(propertyName)) {
         mapProperties[propertyName] = !enabled;
-    });
+      }
+    }
     return mapProperties;
   }
 }

@@ -18,12 +18,12 @@ class HoneywellScanner {
   static const _ON_DECODED = "onDecoded";
   static const _ON_ERROR = "onError";
 
-  static const MethodChannel _channel = const MethodChannel(_METHOD_CHANNEL);
+  static const MethodChannel _channel = MethodChannel(_METHOD_CHANNEL);
   ScannerCallBack? _scannerCallBack;
 
   HoneywellScanner({ScannerCallBack? scannerCallBack}) {
     _channel.setMethodCallHandler(_onMethodCall);
-    this._scannerCallBack = scannerCallBack;
+    _scannerCallBack = scannerCallBack;
   }
 
   set scannerCallBack(ScannerCallBack scannerCallBack) =>
@@ -68,7 +68,7 @@ class HoneywellScanner {
   }
 
   Future<bool> isSupported() async {
-    if(kIsWeb || !Platform.isAndroid) return false;
+    if (kIsWeb || !Platform.isAndroid) return false;
     return await _channel.invokeMethod<bool>(_IS_SUPPORTED) ?? false;
   }
 

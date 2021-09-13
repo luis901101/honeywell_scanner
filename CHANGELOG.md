@@ -1,3 +1,7 @@
+## 3.1.2+9 (2021-09-13)
+### Changed
+- Android plugin API updated to support v2 Embedding while remaining compatible with apps that don’t use the v2 Android embedding.
+
 ## 3.1.1+8 (2021-07-28)
 ### Fixed
 - `Future<bool> isSupported()` validation added to avoid platform plugin exceptions on any other platform different than Android.

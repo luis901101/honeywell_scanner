@@ -1,1 +1,1 @@
-flutter packages pub publish --dry-run $1
+flutter pub publish --dry-run $1

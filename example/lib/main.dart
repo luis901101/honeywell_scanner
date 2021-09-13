@@ -4,10 +4,12 @@ import 'package:honeywell_scanner/honeywell_scanner.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -33,7 +35,7 @@ class _MyAppState extends State<MyApp>
   Future<void> init() async {
     updateScanProperties();
     isDeviceSupported = await honeywellScanner.isSupported();
-    if(mounted) setState(() {});
+    if (mounted) setState(() {});
   }
 
   void updateScanProperties() {
@@ -89,21 +91,23 @@ class _MyAppState extends State<MyApp>
           children: <Widget>[
             Text(
               'Device supported: $isDeviceSupported',
-              style:
-                TextStyle(color: isDeviceSupported ? Colors.green : Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: isDeviceSupported ? Colors.green : Colors.red,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
-              style:
-                  TextStyle(color: scannerEnabled ? Colors.blue : Colors.orange),
+              style: TextStyle(
+                  color: scannerEnabled ? Colors.blue : Colors.orange),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text('Scanned code: $scannedCode'),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             SwitchListTile(
-              title: Text("Scan 1D Codes"),
-              subtitle: Text("like Code-128, Code-39, Code-93, etc"),
+              title: const Text("Scan 1D Codes"),
+              subtitle: const Text("like Code-128, Code-39, Code-93, etc"),
               value: scan1DFormats,
               onChanged: (value) {
                 scan1DFormats = value;
@@ -112,8 +116,8 @@ class _MyAppState extends State<MyApp>
               },
             ),
             SwitchListTile(
-              title: Text("Scan 2D Codes"),
-              subtitle: Text("like QR, Data Matrix, Aztec, etc"),
+              title: const Text("Scan 2D Codes"),
+              subtitle: const Text("like QR, Data Matrix, Aztec, etc"),
               value: scan2DFormats,
               onChanged: (value) {
                 scan2DFormats = value;
@@ -122,18 +126,24 @@ class _MyAppState extends State<MyApp>
               },
             ),
             ElevatedButton(
-              child: Text("Start Scanner"),
+              child: const Text("Start Scanner"),
               onPressed: () async {
-                if(await honeywellScanner.startScanner())
-                  setState(() {scannerEnabled = true;});
+                if (await honeywellScanner.startScanner()) {
+                  setState(() {
+                    scannerEnabled = true;
+                  });
+                }
               },
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             ElevatedButton(
-              child: Text("Stop Scanner"),
+              child: const Text("Stop Scanner"),
               onPressed: () async {
-                if(await honeywellScanner.stopScanner())
-                  setState(() {scannerEnabled = false;});
+                if (await honeywellScanner.stopScanner()) {
+                  setState(() {
+                    scannerEnabled = false;
+                  });
+                }
               },
             ),
           ],

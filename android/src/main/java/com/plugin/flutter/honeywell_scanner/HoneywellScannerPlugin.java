@@ -1,5 +1,6 @@
 package com.plugin.flutter.honeywell_scanner;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 
@@ -7,10 +8,12 @@ import java.util.Map;
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
+import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
+import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * HoneywellScannerPlugin
@@ -33,10 +36,10 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
-        Context context = flutterPluginBinding.getApplicationContext();
-        channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), _METHOD_CHANNEL);
-        channel.setMethodCallHandler(this);
-        (scanner = new HoneywellScannerNative(context)).setScannerCallBack(this);
+        init(
+            flutterPluginBinding.getApplicationContext(),
+            flutterPluginBinding.getBinaryMessenger()
+        );
     }
 
     @Override
@@ -44,9 +47,25 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
         if(channel != null) channel.setMethodCallHandler(null);
     }
 
-    public HoneywellScannerPlugin()
+    // This static method is only to remain compatible with apps that don’t use the v2 Android embedding.
+    @Deprecated()
+    @SuppressLint("Registrar")
+    public static void registerWith(Registrar registrar)
     {
+        new HoneywellScannerPlugin().init(
+            registrar.context(),
+            registrar.messenger()
+        );
+    }
+
+    public HoneywellScannerPlugin() {
         handler = new Handler();
+    }
+
+    private void init(Context context, BinaryMessenger messenger) {
+        channel = new MethodChannel(messenger, _METHOD_CHANNEL);
+        channel.setMethodCallHandler(this);
+        (scanner = new HoneywellScannerNative(context)).setScannerCallBack(this);
     }
 
     private void scannerNotInitialized(Result result){

@@ -106,3 +106,8 @@ honeywellScanner.stopScanner();
 
 ### Note:
 it's recommended to check the example code for a better idea of how to work with this plugin.
+
+## Other plugins you may be interested in
+
+- [blue_bird_scanner](https://pub.dev/packages/blue_bird_scanner)
+- [zkc_scanner](https://pub.dev/packages/zkc_scanner)
