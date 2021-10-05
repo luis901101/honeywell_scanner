@@ -1,3 +1,11 @@
+## 3.1.3+10 (2021-10-05)
+### Added
+- doc folder added with specific BarCode properties documentation.
+
+### Changed
+- Minor changes to example code
+- README.md updated
+
 ## 3.1.2+9 (2021-09-13)
 ### Changed
 - Android plugin API updated to support v2 Embedding while remaining compatible with apps that don’t use the v2 Android embedding.
