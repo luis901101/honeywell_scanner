@@ -109,7 +109,7 @@ honeywellScanner.setProperties(properties);
 ```
 **IMPORTANT:** 
 To know and understand the full list of supported properties you may check the Honeywell SDK documentation *(to get SDK documentation read the About Honeywell SDK at the beginning of this README)*.
-Anyway you can check a quick documentation in the [doc](https://github.com/luis901101/honeywell_scanner/tree/master/doc) folder on this plugin where you can find the **BarcodeReader.html** explaining all about barcode reader including properties and the **BarcodeReaderProperties.java** where you can find all the property values you can set. 
+Anyway you can check a quick documentation in the [doc](https://github.com/luis901101/honeywell_scanner/tree/master/doc) folder on this plugin where you can find the [BarcodeReader.html](https://github.com/luis901101/honeywell_scanner/blob/master/doc/BarcodeReader.html) explaining all about barcode reader including properties and the [BarcodeReaderProperties.java](https://github.com/luis901101/honeywell_scanner/blob/master/doc/BarcodeReaderProperties.java) where you can find all the property values you can set. 
 
 4. Start scanner listener, at this point the app will be listening for any scanned code when you press the physical PDA button to scan something:
 ```dart
