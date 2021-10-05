@@ -1,3 +1,7 @@
+## 3.1.3+11 (2021-10-05)
+### Changed
+- README.md updated
+
 ## 3.1.3+10 (2021-10-05)
 ### Added
 - doc folder added with specific BarCode properties documentation.

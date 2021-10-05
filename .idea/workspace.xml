@@ -22,14 +22,10 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8afd1be9-2a49-4949-ab7d-9ed0e35ab749" name="Default" comment="- doc folder added with specific BarCode properties documentation.&#10;- Minor changes to example code&#10;- README.md updated">
-      <change afterPath="$PROJECT_DIR$/doc/BarcodeReader.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doc/BarcodeReaderProperties.java" afterDir="false" />
+    <list default="true" id="8afd1be9-2a49-4949-ab7d-9ed0e35ab749" name="Default" comment="- README.md updated">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -386,7 +382,28 @@
       <option name="project" value="LOCAL" />
       <updated>1631567587740</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="- doc folder added with specific BarCode properties documentation.">
+      <created>1633464033534</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1633464033534</updated>
+    </task>
+    <task id="LOCAL-00019" summary="- Minor changes to example code">
+      <created>1633464047680</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1633464047680</updated>
+    </task>
+    <task id="LOCAL-00020" summary="- README.md updated">
+      <created>1633464052672</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1633464052672</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TodoView" selected-index="4">
@@ -452,14 +469,16 @@
     <MESSAGE value="- Honeywell sdk lib AAR updated to v1.00.00.0102&#10;- Example project updated to show a more detailed how to use.&#10;- CodeFormatUtils is now an extension of CodeFormat *(breaking change)*" />
     <MESSAGE value="- Changed the way of importing the honeywell.aar library **(breaking change)**" />
     <MESSAGE value="- Bug on releasing the scanner claim when **stopScanner** was called" />
-    <MESSAGE value="- README.md updated" />
     <MESSAGE value="- README.md corrected" />
     <MESSAGE value="- Support for null-safety" />
     <MESSAGE value="- Android gradle plugin updated&#10;- Android compileSdkVersion updated" />
     <MESSAGE value="- Example android gradle confs updated" />
     <MESSAGE value="- `Future&lt;bool&gt; isSupported()` validation added to avoid platform plugin exceptions on any other platform different than Android.&#10;- `Future&lt;bool&gt; isSupported()` function added to know if running device is supported by honeywell scanner." />
     <MESSAGE value="- Android plugin API updated to support v2 Embedding while remaining compatible with apps that don’t use the v2 Android embedding." />
-    <option name="LAST_COMMIT_MESSAGE" value="- Android plugin API updated to support v2 Embedding while remaining compatible with apps that don’t use the v2 Android embedding." />
+    <MESSAGE value="- doc folder added with specific BarCode properties documentation." />
+    <MESSAGE value="- Minor changes to example code" />
+    <MESSAGE value="- README.md updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="- README.md updated" />
   </component>
   <component name="WindowStateProjectService">
     <state width="1494" height="267" key="GridCell.Tab.0.bottom" timestamp="1633463643847">
@@ -526,6 +545,10 @@
       <screen x="0" y="25" width="1536" height="935" />
     </state>
     <state width="1494" height="267" key="GridCell.Tab.3.right/0.25.1536.935@0.25.1536.935" timestamp="1633463643846" />
+    <state x="482" y="199" key="RollbackChangesDialog" timestamp="1633463775109">
+      <screen x="0" y="25" width="1536" height="935" />
+    </state>
+    <state x="482" y="199" key="RollbackChangesDialog/0.25.1536.935@0.25.1536.935" timestamp="1633463775109" />
     <state x="433" y="229" width="670" height="676" key="search.everywhere.popup" timestamp="1633449237488">
       <screen x="0" y="25" width="1536" height="935" />
     </state>

@@ -5,9 +5,9 @@ This plugin uses the native Android SDK available in the [Technical Support Down
 From there you will be able to download the **Honeywell_MobilitySDK_Android_vx.xx.zip** which is the one used in this plugin.
 The **Honeywell_MobilitySDK_Android** code is located in `Software -> Software and tools -> Developer Library -> SDKs for Android`
 Inside the .zip file you will find sample code, pdf and html documentation and the DataCollection.aar library which is all the necessary documentation to understand and work with the **Honeywell_MobilitySDK_Android** 
-#### Note: You do not have to do anything from the description above to be able to use this plugin, it's just a guide for the ones that need to know the source of truth.
+#### **Note: You do not have to do anything from the description above to be able to use this plugin, it's just a guide for the ones that need to know the source of truth.**
 
-### Native library version used: 1.00.00.0102
+### **Native library version used: 1.00.00.0102**
 
 ## Description
 
@@ -109,7 +109,7 @@ honeywellScanner.setProperties(properties);
 ```
 **IMPORTANT:** 
 To know and understand the full list of supported properties you may check the Honeywell SDK documentation *(to get SDK documentation read the About Honeywell SDK at the beginning of this README)*.
-Anyway you can check a quick documentation in the [doc](https://github.com/luis901101/honeywell_scanner/doc) folder on this plugin where you can find the **BarcodeReader.html** explaining all about barcode reader including properties and the **BarcodeReaderProperties.java** where you can find all the property values you can set. 
+Anyway you can check a quick documentation in the [doc](https://github.com/luis901101/honeywell_scanner/tree/master/doc) folder on this plugin where you can find the **BarcodeReader.html** explaining all about barcode reader including properties and the **BarcodeReaderProperties.java** where you can find all the property values you can set. 
 
 4. Start scanner listener, at this point the app will be listening for any scanned code when you press the physical PDA button to scan something:
 ```dart
