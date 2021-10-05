@@ -61,8 +61,12 @@ class _MyAppState extends State<MyApp>
 //    codeFormats.add(CodeFormat.UPC_E);
 ////    codeFormats.add(CodeFormat.UPC_EAN_EXTENSION);
 
-    honeywellScanner
-        .setProperties(CodeFormatUtils.getAsPropertiesComplement(codeFormats));
+    Map<String, dynamic> properties = {
+      ...CodeFormatUtils.getAsPropertiesComplement(codeFormats),
+      'DEC_CODABAR_START_STOP_TRANSMIT': true,
+      'DEC_EAN13_CHECK_DIGIT_TRANSMIT': true,
+    };
+    honeywellScanner.setProperties(properties);
   }
 
   @override
@@ -86,67 +90,74 @@ class _MyAppState extends State<MyApp>
         appBar: AppBar(
           title: const Text('Honeywell scanner example'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Device supported: $isDeviceSupported',
-              style: TextStyle(
-                  color: isDeviceSupported ? Colors.green : Colors.red,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold),
+        body: Center(
+          child: Scrollbar(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Device supported: $isDeviceSupported',
+                    style: TextStyle(
+                        color: isDeviceSupported ? Colors.green : Colors.red,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
+                    style: TextStyle(
+                        color: scannerEnabled ? Colors.blue : Colors.orange),
+                  ),
+                  const SizedBox(height: 8),
+                  Text('Scanned code: $scannedCode'),
+                  const SizedBox(height: 8),
+                  SwitchListTile(
+                    title: const Text("Scan 1D Codes"),
+                    subtitle:
+                        const Text("like Code-128, Code-39, Code-93, etc"),
+                    value: scan1DFormats,
+                    onChanged: (value) {
+                      scan1DFormats = value;
+                      updateScanProperties();
+                      setState(() {});
+                    },
+                  ),
+                  SwitchListTile(
+                    title: const Text("Scan 2D Codes"),
+                    subtitle: const Text("like QR, Data Matrix, Aztec, etc"),
+                    value: scan2DFormats,
+                    onChanged: (value) {
+                      scan2DFormats = value;
+                      updateScanProperties();
+                      setState(() {});
+                    },
+                  ),
+                  ElevatedButton(
+                    child: const Text("Start Scanner"),
+                    onPressed: () async {
+                      if (await honeywellScanner.startScanner()) {
+                        setState(() {
+                          scannerEnabled = true;
+                        });
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  ElevatedButton(
+                    child: const Text("Stop Scanner"),
+                    onPressed: () async {
+                      if (await honeywellScanner.stopScanner()) {
+                        setState(() {
+                          scannerEnabled = false;
+                        });
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              'Scanner: ${scannerEnabled ? "Started" : "Stopped"}',
-              style: TextStyle(
-                  color: scannerEnabled ? Colors.blue : Colors.orange),
-            ),
-            const SizedBox(height: 8),
-            Text('Scanned code: $scannedCode'),
-            const SizedBox(height: 8),
-            SwitchListTile(
-              title: const Text("Scan 1D Codes"),
-              subtitle: const Text("like Code-128, Code-39, Code-93, etc"),
-              value: scan1DFormats,
-              onChanged: (value) {
-                scan1DFormats = value;
-                updateScanProperties();
-                setState(() {});
-              },
-            ),
-            SwitchListTile(
-              title: const Text("Scan 2D Codes"),
-              subtitle: const Text("like QR, Data Matrix, Aztec, etc"),
-              value: scan2DFormats,
-              onChanged: (value) {
-                scan2DFormats = value;
-                updateScanProperties();
-                setState(() {});
-              },
-            ),
-            ElevatedButton(
-              child: const Text("Start Scanner"),
-              onPressed: () async {
-                if (await honeywellScanner.startScanner()) {
-                  setState(() {
-                    scannerEnabled = true;
-                  });
-                }
-              },
-            ),
-            const SizedBox(height: 8),
-            ElevatedButton(
-              child: const Text("Stop Scanner"),
-              onPressed: () async {
-                if (await honeywellScanner.stopScanner()) {
-                  setState(() {
-                    scannerEnabled = false;
-                  });
-                }
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
