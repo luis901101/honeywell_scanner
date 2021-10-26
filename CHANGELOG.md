@@ -1,3 +1,7 @@
+## 3.1.4+12 (2021-10-26)  
+### Changed  
+- Data collection SDK updated to v1.97.00.0026. *If you were using a previous version of this plugin then you should check the **How to use** from **Readme** and do the **Second** step again to ensure using the new **Honeywell DataCollection.aar** library*
+
 ## 3.1.3+11 (2021-10-05)
 ### Changed
 - README.md updated

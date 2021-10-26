@@ -17,6 +17,7 @@ public final class BarcodeReaderProperties {
     public static final String IMAGER_SAMPLE_METHOD_UNIFORM = "uniform";
     public static final String IMAGER_SAMPLE_METHOD_CENTER = "center";
     public static final String IMAGER_SAMPLE_METHOD_CENTER_WEIGHTED = "centerWeighted";
+    public static final String PROPERTY_IMAGER_OVERRIDE_RECOMMENDED_VALUES = "IMG_OVERRIDE_RECOMMENDED_VALUES";
     public static final String PROPERTY_NOTIFICATION_GOOD_READ_ENABLED = "NTF_GOOD_READ_ENABLED";
     public static final String PROPERTY_NOTIFICATION_BAD_READ_ENABLED = "NTF_BAD_READ_ENABLED";
     public static final String PROPERTY_NOTIFICATION_VIBRATE_ENABLED = "NTF_VIBRATE_ENABLED";
@@ -287,7 +288,9 @@ public final class BarcodeReaderProperties {
     public static final String PROPERTY_VIDEO_REVERSE_ENABLED = "DEC_VIDEO_REVERSE_ENABLED";
     public static final String VIDEO_REVERSE_ENABLED_NORMAL = "normal";
     public static final String VIDEO_REVERSE_ENABLED_INVERSE = "inverse";
-    public static final String VIDEO_REVERSE_ENABLED_BOTH = "both";    
+    public static final String VIDEO_REVERSE_ENABLED_BOTH = "both";
+    public static final String PROPERTY_DECODER_TIMEOUT = "DEC_DECODER_TIMEOUT";
+    public static final String PROPERTY_DECODE_MOBILE_READ_ENABLE = "DECODE_MOBILE_READ_ENABLE";
     public static final String GOOD_READ_NOTIFICATION = "goodRead";
-    public static final String BAD_READ_NOTIFICATION = "badRead";    
+    public static final String BAD_READ_NOTIFICATION = "badRead";
 }

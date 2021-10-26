@@ -2,12 +2,15 @@ This is a plugin to scan barcodes by using [Honeywell](https://www.honeywellaidc
 
 ## About Honeywell SDK
 This plugin uses the native Android SDK available in the [Technical Support Downloads Portal](https://hsmftp.honeywell.com/) for honeywell devices, note that you will need to create an account to download any Honeywell software.
-From there you will be able to download the **Honeywell_MobilitySDK_Android_vx.xx.zip** which is the one used in this plugin.
-The **Honeywell_MobilitySDK_Android** code is located in `Software -> Software and tools -> Developer Library -> SDKs for Android`
-Inside the .zip file you will find sample code, pdf and html documentation and the DataCollection.aar library which is all the necessary documentation to understand and work with the **Honeywell_MobilitySDK_Android** 
+From there you will be able to download the **Honeywell_MobilitySDK_Android_vx.xx.zip** which contains the **Android Data Collection SDK** that is the one used in this plugin.
+The **Honeywell_MobilitySDK_Android** is located in `Software -> Software and tools -> Developer Library -> SDKs for Android`
+Inside the .zip file you will find the **Android Data Collection SDK** that contains the `DataCollection.aar` library with sample code, pdf and html documentation enough to understand and work with the **Android Data Collection SDK** 
+
+### Mobility SDK version: 1.00.00.0135
+### Data collection SDK version: 1.97.00.0026
+
 #### **Note: You do not have to do anything from the description above to be able to use this plugin, it's just a guide for the ones that need to know the source of truth.**
 
-### **Native library version used: 1.00.00.0102**
 
 ## Description
 
@@ -19,16 +22,20 @@ CK75
 CN75
 CN75e
 CN80
-CN85 
-Dolphin 75e 
-Dolphin CT40 
-Dolphin CT50 
-Dolphin CT60 
-EDA50 
-EDA51
-EDA50K 
+CN85
+Dolphin 75e
+Dolphin CT40/CT40XP
+Dolphin CT50
+Dolphin CT60
+EDA50
+EDA50K
 EDA70
 Thor VM1A
+VM3A
+RT10A
+CK65
+CN80G
+CT60XP
 ```
 If your device doesn't show up in the list above, give it a try anyway...
 
@@ -36,7 +43,7 @@ If your device doesn't show up in the list above, give it a try anyway...
 
 ## How to use
 
-#### First
+# First
 Run this command:
 ```bash
 flutter pub add honeywell_scanner
@@ -47,24 +54,24 @@ honeywell_scanner: ^latest_version
 ```
 Then run `flutter pub get` to download the library sources to your pub-cache.
 
-#### Second
+# Second
 Copy the **honeywell** folder which is inside the example code sources at:
 
-`.../your-flutter-sdk/.pub-cache/hosted/pub.dartlang.org/honeywell_scanner-x.x.x+x/example/android/honeywell`
+`.../.pub-cache/hosted/pub.dartlang.org/honeywell_scanner-x.x.x+x/example/android/honeywell`
 
-into your android project module which is going to use this plugin. This step is necessary and crucial because the Honeywell Android library is a bundle .aar which has to be referenced as a project library.
+into your android project module which is going to use this plugin. This step is necessary and crucial because the Honeywell Data Collection Android library is a bundle .aar which has to be referenced as a project library.
 
 
-#### Third
+# Third
 Add this `include ':honeywell'` to your `settings.gradle` in your android project module to allow the plugin to locate the honeywell.aar library.
 
 
-#### Fourth
+# Fourth
 
-Add `tools:replace="android:label"` to your **AndroidManifest.xml**, this is required because the **honeywell.aar** library defines an `android:label="@string/app_name"` which conflicts with your project's label resulting in a *Manifest merger failed* error
+Add `tools:replace="android:label"` under `application` tag in your **AndroidManifest.xml**, this is required because the **honeywell.aar** library defines an `android:label="@string/app_name"` which conflicts with your project's label resulting in a *Manifest merger failed* error
 
 
-#### Fifth
+# Fifth
 To use the honeywell_scanner plugin just:
 
 1. Instantiate:
