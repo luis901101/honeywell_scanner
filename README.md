@@ -74,9 +74,14 @@ Add `tools:replace="android:label"` under `application` tag in your **AndroidMan
 # Fifth
 To use the honeywell_scanner plugin just:
 
-1. Instantiate:
+0. Instantiate:
 ```dart
 HoneywellScanner honeywellScanner = HoneywellScanner();
+```
+
+1. Check if device is supported. Take into account this plugin supports a list of Honeywell devices but not all, so this function ensures you compatibility.
+```dart
+isDeviceSupported = await honeywellScanner.isSupported();
 ```
 
 2. Set the ScannerCallBack listener:
@@ -85,7 +90,6 @@ honeywellScanner.setScannerCallBack(this);
 ```
 
 3. Override the ScannerCallback methods
-
 ```dart
 @override
   void onDecoded(String result) {
@@ -102,7 +106,7 @@ honeywellScanner.setScannerCallBack(this);
   }
 ```
 
-3. Setting properties. By default **honeywell_scanner** sets properties to support all code formats from `CodeFormat` enum, it also sets the trigger control property to `autoControl` and disables browser launching when scanning urls.
+4. Setting properties. By default **honeywell_scanner** sets properties to support all code formats from `CodeFormat` enum, it also sets the trigger control property to `autoControl` and disables browser launching when scanning urls.
 However you can set any property you want by using the `honeywellScanner.setProperties(properties)` in case you need some specific behavior from the scanner. 
 Properties are represented as a `Map<String, dynamic>`, so for instance if you want the scanner only scans 1D codes and you want the scanned **EAN-13** bar codes to include the last digit **(the check digit)** and want the scanned **Codabar** bar codes to include the **start/stop digits**; then you must set it on properties like:
 ```dart
@@ -114,24 +118,40 @@ Map<String, dynamic> properties = {
 };
 honeywellScanner.setProperties(properties);
 ```
-**IMPORTANT:** 
+## **IMPORTANT:** 
 To know and understand the full list of supported properties you may check the Honeywell SDK documentation *(to get SDK documentation read the About Honeywell SDK at the beginning of this README)*.
 Anyway you can check a quick documentation in the [doc](https://github.com/luis901101/honeywell_scanner/tree/master/doc) folder on this plugin where you can find the [BarcodeReader.html](https://github.com/luis901101/honeywell_scanner/blob/master/doc/BarcodeReader.html) explaining all about barcode reader including properties and the [BarcodeReaderProperties.java](https://github.com/luis901101/honeywell_scanner/blob/master/doc/BarcodeReaderProperties.java) where you can find all the property values you can set. 
 
-4. Start scanner listener, at this point the app will be listening for any scanned code when you press the physical PDA button to scan something:
+5. Start scanner listener, at this point the app will be listening for any scanned code when you press the physical PDA button or your in-app button to scan codes:
 ```dart
 honeywellScanner.startScanner();
 ```
 
-5. Stop scanner listener, this will release and close the scanner connection:
+6. Stop scanner listener, this will release and close the scanner connection:
 ```dart
 honeywellScanner.stopScanner();
 ```
 
-6. You can also do a `scanner.pauseScanner()` or `scanner.resumeScanner()` depending on your app life cycle state.
+7. Check if scanner is already started:
+```dart
+honeywellScanner.isStarted;
+```
 
-### Note:
-it's recommended to check the example code for a better idea of how to work with this plugin.
+8. You can also do a `scanner.pauseScanner()` or `scanner.resumeScanner()` depending on your app life cycle state.
+
+9. Start scanning, this function activates the scanner sensor to scan codes. This is the same as pressing the PDA physical button:
+```dart
+honeywellScanner.startScanning();
+```
+
+10. Stop scanning, it cancels the scanning:
+```dart
+honeywellScanner.stopScanning();
+``` 
+
+### Notes:
+> - Both `startScaning()` and `stopScanning()` uses the `softwareTrigger(bool state)` function where `state = true` means scanning and `state = false` menas not scanning
+> - It's recommended to check the example code for a better idea of how to work with this plugin.
 
 ## Other plugins you may be interested in
 

@@ -10,11 +10,15 @@ export 'package:honeywell_scanner/code_format.dart';
 class HoneywellScanner {
   static const _METHOD_CHANNEL = "honeywellscanner";
   static const _IS_SUPPORTED = "isSupported";
+  static const _IS_STARTED = "isStarted";
   static const _SET_PROPERTIES = "setProperties";
   static const _START_SCANNER = "startScanner";
   static const _RESUME_SCANNER = "resumeScanner";
   static const _PAUSE_SCANNER = "pauseScanner";
   static const _STOP_SCANNER = "stopScanner";
+  static const _SOFTWARE_TRIGGER = "softwareTrigger";
+  static const _START_SCANNING = "startScanning";
+  static const _STOP_SCANNING = "stopScanning";
   static const _ON_DECODED = "onDecoded";
   static const _ON_ERROR = "onError";
 
@@ -72,6 +76,11 @@ class HoneywellScanner {
     return await _channel.invokeMethod<bool>(_IS_SUPPORTED) ?? false;
   }
 
+  Future<bool> isStarted() async {
+    if (kIsWeb || !Platform.isAndroid) return false;
+    return await _channel.invokeMethod<bool>(_IS_STARTED) ?? false;
+  }
+
   Future<void> setProperties(Map<String, dynamic> mapProperties) {
     return _channel.invokeMethod(_SET_PROPERTIES, mapProperties);
   }
@@ -90,5 +99,17 @@ class HoneywellScanner {
 
   Future<bool> stopScanner() async {
     return await _channel.invokeMethod(_STOP_SCANNER) ?? false;
+  }
+
+  Future<bool> softwareTrigger(bool state) async {
+    return await _channel.invokeMethod(_SOFTWARE_TRIGGER, state) ?? false;
+  }
+
+  Future<bool> startScanning() async {
+    return await _channel.invokeMethod(_START_SCANNING) ?? false;
+  }
+
+  Future<bool> stopScanning() async {
+    return await _channel.invokeMethod(_STOP_SCANNING) ?? false;
   }
 }

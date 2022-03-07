@@ -50,9 +50,13 @@ public abstract class HoneywellScanner implements ScannerCallBack
     }
 
     public abstract boolean isSupported();
+    public abstract boolean isStarted();
     public abstract void setProperties(Map<String, Object> mapProperties);
     public abstract boolean startScanner();
     public abstract boolean resumeScanner();
     public abstract boolean pauseScanner();
     public abstract boolean stopScanner();
+    public abstract void softwareTrigger(boolean state) throws Exception;
+    public abstract void startScanning() throws Exception;
+    public abstract void stopScanning() throws Exception;
 }

@@ -22,11 +22,15 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
 {
     private static final String _METHOD_CHANNEL = "honeywellscanner";
     private static final String _IS_SUPPORTED = "isSupported";
+    private static final String _IS_STARTED = "isStarted";
     private static final String _SET_PROPERTIES = "setProperties";
     private static final String _START_SCANNER = "startScanner";
     private static final String _RESUME_SCANNER = "resumeScanner";
     private static final String _PAUSE_SCANNER = "pauseScanner";
     private static final String _STOP_SCANNER = "stopScanner";
+    private static final String _SOFTWARE_TRIGGER = "softwareTrigger";
+    private static final String _START_SCANNING = "startScanning";
+    private static final String _STOP_SCANNING = "stopScanning";
     private static final String _ON_DECODED = "onDecoded";
     private static final String _ON_ERROR = "onError";
 
@@ -85,6 +89,11 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
                         result.success(scanner.isSupported());
                     else scannerNotInitialized(result);
                     break;
+                case _IS_STARTED:
+                    if(scanner != null)
+                        result.success(scanner.isStarted());
+                    else scannerNotInitialized(result);
+                    break;
                 case _SET_PROPERTIES:
                     if(scanner != null){
                         scanner.setProperties((Map<String, Object>) call.arguments);
@@ -110,6 +119,27 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
                 case _STOP_SCANNER:
                     if(scanner != null)
                         result.success(scanner.stopScanner());
+                    else scannerNotInitialized(result);
+                    break;
+                case _SOFTWARE_TRIGGER:
+                    if(scanner != null) {
+                        scanner.softwareTrigger((Boolean) call.arguments());
+                        result.success(true);
+                    }
+                    else scannerNotInitialized(result);
+                    break;
+                case _START_SCANNING:
+                    if(scanner != null) {
+                        scanner.startScanning();
+                        result.success(true);
+                    }
+                    else scannerNotInitialized(result);
+                    break;
+                case _STOP_SCANNING:
+                    if(scanner != null) {
+                        scanner.stopScanning();
+                        result.success(true);
+                    }
                     else scannerNotInitialized(result);
                     break;
                 default:

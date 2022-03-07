@@ -17,7 +17,7 @@ import java.util.Map;
  */
 public class HoneywellScannerBroadcasts extends HoneywellScanner
 {
-    class Constants
+    static class Constants
     {
         /**
          * Get the result of decoded data
@@ -127,7 +127,6 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
     }
 
 
-    private boolean supported;
     private ScanBroadcastReceiver scanBroadcastReceiver;
     private IntentFilter intentFilter;
     private Bundle properties;
@@ -136,13 +135,15 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
     public HoneywellScannerBroadcasts(Context context)
     {
         super(context);
-        supported = true;
         init();
     }
 
     @Override
-    public boolean isSupported() { return supported; }
-    
+    public boolean isSupported() { return true; }
+
+    @Override
+    public boolean isStarted() { return true; }
+
     private void initProperties(){
         properties = new Bundle();
         properties.putBoolean(Constants.PROPERTY_AZTEC_ENABLED, true);
@@ -220,7 +221,7 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
             isOpened = true;
         }catch(Exception e)
         {
-            e.getMessage();
+            e.printStackTrace();
         }
         return true;
     }
@@ -236,9 +237,27 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
             isOpened = false;
         }catch(Exception e)
         {
-            e.getMessage();
+            e.printStackTrace();
         }
         return true;
+    }
+
+    @Override
+    public void softwareTrigger(boolean state) throws Exception
+    {
+
+    }
+
+    @Override
+    public void startScanning() throws Exception
+    {
+
+    }
+
+    @Override
+    public void stopScanning() throws Exception
+    {
+
     }
 
     private void registerReceiver()
@@ -249,7 +268,7 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
             context.registerReceiver(scanBroadcastReceiver, intentFilter);
         }catch(Exception e)
         {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 
@@ -260,7 +279,7 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
             context.unregisterReceiver(scanBroadcastReceiver);
         }catch(Exception e)
         {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 }

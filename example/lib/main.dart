@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:honeywell_scanner/honeywell_scanner.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) => runApp(const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -18,11 +19,16 @@ class _MyAppState extends State<MyApp>
     with WidgetsBindingObserver
     implements ScannerCallBack {
   HoneywellScanner honeywellScanner = HoneywellScanner();
-  String? scannedCode = 'Empty';
+  String? scannedCode = 'Empty', errorMessage;
   bool scannerEnabled = false;
   bool scan1DFormats = true;
   bool scan2DFormats = true;
   bool isDeviceSupported = false;
+
+  static const BTN_START_SCANNER = 0,
+      BTN_STOP_SCANNER = 1,
+      BTN_START_SCANNING = 2,
+      BTN_STOP_SCANNING = 3;
 
   @override
   void initState() {
@@ -112,6 +118,15 @@ class _MyAppState extends State<MyApp>
                   const SizedBox(height: 8),
                   Text('Scanned code: $scannedCode'),
                   const SizedBox(height: 8),
+                  if (errorMessage != null) ...[
+                    Text(
+                      'Error: $errorMessage',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                  ],
                   SwitchListTile(
                     title: const Text("Scan 1D Codes"),
                     subtitle:
@@ -133,26 +148,45 @@ class _MyAppState extends State<MyApp>
                       setState(() {});
                     },
                   ),
-                  ElevatedButton(
-                    child: const Text("Start Scanner"),
-                    onPressed: () async {
-                      if (await honeywellScanner.startScanner()) {
-                        setState(() {
-                          scannerEnabled = true;
-                        });
-                      }
-                    },
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        child: const Text("Start Scanner"),
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.blue)),
+                        onPressed: () => onClick(BTN_START_SCANNER),
+                      ),
+                      ElevatedButton(
+                        child: const Text("Stop Scanner"),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.blue.shade700)),
+                        onPressed: () => onClick(BTN_STOP_SCANNER),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  ElevatedButton(
-                    child: const Text("Stop Scanner"),
-                    onPressed: () async {
-                      if (await honeywellScanner.stopScanner()) {
-                        setState(() {
-                          scannerEnabled = false;
-                        });
-                      }
-                    },
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
+                        child: const Text("Start Scanning"),
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.green)),
+                        onPressed: () => onClick(BTN_START_SCANNING),
+                      ),
+                      ElevatedButton(
+                        child: const Text("Stop Scanning"),
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all(
+                                Colors.green.shade700)),
+                        onPressed: () => onClick(BTN_STOP_SCANNING),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -182,6 +216,39 @@ class _MyAppState extends State<MyApp>
         break;
       default:
         break;
+    }
+  }
+
+  Future<void> onClick(int id) async {
+    try {
+      errorMessage = null;
+      switch (id) {
+        case BTN_START_SCANNER:
+          if (await honeywellScanner.startScanner()) {
+            setState(() {
+              scannerEnabled = true;
+            });
+          }
+          break;
+        case BTN_STOP_SCANNER:
+          if (await honeywellScanner.stopScanner()) {
+            setState(() {
+              scannerEnabled = false;
+            });
+          }
+          break;
+        case BTN_START_SCANNING:
+          await honeywellScanner.startScanning();
+          break;
+        case BTN_STOP_SCANNING:
+          await honeywellScanner.stopScanning();
+          break;
+      }
+    } catch (e) {
+      print(e);
+      setState(() {
+        errorMessage = e.toString();
+      });
     }
   }
 

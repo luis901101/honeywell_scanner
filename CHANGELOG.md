@@ -1,3 +1,22 @@
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+Types of changes
+- `Added` for new features.
+- `Changed` for changes in existing functionality.
+- `Deprecated` for soon-to-be removed features.
+- `Removed` for now removed features.
+- `Fixed` for any bug fixes.
+- `Security` in case of vulnerabilities.
+
+## 3.2.0+13 (2022-03-07)  
+### Added
+- Scan trigger. Now scanning can be triggered by a button in your app.
+
+### Changed
+- Example updated to show how to use scan trigger.
+- Readme updated to show how to use scan trigger.
+
 ## 3.1.4+12 (2021-10-26)  
 ### Changed  
 - Data collection SDK updated to v1.97.00.0026. *If you were using a previous version of this plugin then you should check the **How to use** from **Readme** and do the **Second** step again to ensure using the new **Honeywell DataCollection.aar** library*

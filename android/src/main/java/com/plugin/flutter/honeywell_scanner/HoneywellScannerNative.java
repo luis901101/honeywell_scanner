@@ -35,6 +35,9 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
     @Override
     public boolean isSupported() { return supported; }
 
+    @Override
+    public boolean isStarted() { return initialized && scanner != null; }
+
     private void init()
     {
         initializing = true;
@@ -111,7 +114,37 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
         if(mapProperties == null) return;
         initProperties();
         properties.putAll(mapProperties);
-        if(scanner != null) scanner.setProperties(properties);
+        if(isStarted()) scanner.setProperties(properties);
+    }
+
+    /**
+     * Sends a trigger up/down action
+     * Parameters:
+     * state - Whether to trigger the scanner on or off
+     * Throws:
+     * ScannerNotClaimedException
+     * ScannerUnavailableException
+     */
+    @Override
+    public void softwareTrigger(boolean state) throws Exception
+    {
+        if(isStarted())
+            scanner.softwareTrigger(state);
+        else
+            throw new Exception("Scanner is stopped");
+    }
+
+    @Override
+    public void startScanning() throws Exception
+    {
+        stopScanning();
+        softwareTrigger(true);
+    }
+
+    @Override
+    public void stopScanning() throws Exception
+    {
+        softwareTrigger(false);
     }
 
     @Override
