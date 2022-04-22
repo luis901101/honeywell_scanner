@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:honeywell_scanner/scanned_data.dart';
 import 'package:honeywell_scanner/scanner_callback.dart';
 
 export 'package:honeywell_scanner/scanner_callback.dart';
 export 'package:honeywell_scanner/code_format.dart';
+export 'package:honeywell_scanner/scanned_data.dart';
 
 class HoneywellScanner {
   static const _METHOD_CHANNEL = "honeywellscanner";
@@ -23,18 +25,28 @@ class HoneywellScanner {
   static const _ON_ERROR = "onError";
 
   static const MethodChannel _channel = MethodChannel(_METHOD_CHANNEL);
-  ScannerCallBack? _scannerCallBack;
+  ScannerCallback? _scannerCallback;
+  OnScannerDecodeCallback? _onScannerDecodeCallback;
+  OnScannerErrorCallback? _onScannerErrorCallback;
 
-  HoneywellScanner({ScannerCallBack? scannerCallBack}) {
+  HoneywellScanner(
+      {ScannerCallback? scannerCallback,
+      OnScannerDecodeCallback? onScannerDecodeCallback,
+      OnScannerErrorCallback? onScannerErrorCallback}) {
     _channel.setMethodCallHandler(_onMethodCall);
-    _scannerCallBack = scannerCallBack;
+    _scannerCallback = scannerCallback;
+    _onScannerDecodeCallback = onScannerDecodeCallback;
+    _onScannerErrorCallback = onScannerErrorCallback;
   }
 
-  set scannerCallBack(ScannerCallBack scannerCallBack) =>
-      _scannerCallBack = scannerCallBack;
+  set scannerCallback(ScannerCallback scannerCallback) =>
+      _scannerCallback = scannerCallback;
 
-  void setScannerCallBack(ScannerCallBack scannerCallBack) =>
-      this.scannerCallBack = scannerCallBack;
+  set onScannerDecodeCallback(OnScannerDecodeCallback value) =>
+      _onScannerDecodeCallback = value;
+
+  set onScannerErrorCallback(OnScannerErrorCallback value) =>
+      _onScannerErrorCallback = value;
 
   Future<void> _onMethodCall(MethodCall call) async {
     try {
@@ -57,9 +69,13 @@ class HoneywellScanner {
   ///<br>
   ///Note that this method always called on a worker thread
   ///
-  ///@param code Encapsulates the result of decoding a barcode within an image
-  void onDecoded(String? code) {
-    _scannerCallBack?.onDecoded(code);
+  ///@param scannedData Encapsulates the result of decoding a barcode within an image
+  void onDecoded(Map<dynamic, dynamic>? scannedDataMap) {
+    if (scannedDataMap != null) {
+      final scannedData = ScannedData.fromMap(scannedDataMap);
+      _scannerCallback?.onDecoded(scannedData);
+      _onScannerDecodeCallback?.call(scannedData);
+    }
   }
 
   ///Called when error has occurred
@@ -68,7 +84,8 @@ class HoneywellScanner {
   ///
   ///@param error Exception that has been thrown
   void onError(Exception error) {
-    _scannerCallBack?.onError(error);
+    _scannerCallback?.onError(error);
+    _onScannerErrorCallback?.call(error);
   }
 
   Future<bool> isSupported() async {

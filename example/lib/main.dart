@@ -17,9 +17,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp>
     with WidgetsBindingObserver
-    implements ScannerCallBack {
+    implements ScannerCallback {
   HoneywellScanner honeywellScanner = HoneywellScanner();
-  String? scannedCode = 'Empty', errorMessage;
+  ScannedData? scannedData;
+  String? errorMessage;
   bool scannerEnabled = false;
   bool scan1DFormats = true;
   bool scan2DFormats = true;
@@ -33,8 +34,10 @@ class _MyAppState extends State<MyApp>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
-    honeywellScanner.setScannerCallBack(this);
+    WidgetsBinding.instance.addObserver(this);
+    honeywellScanner.scannerCallback = this;
+    // honeywellScanner.onScannerDecodeCallback = onDecoded;
+    // honeywellScanner.onScannerErrorCallback = onError;
     init();
   }
 
@@ -76,18 +79,48 @@ class _MyAppState extends State<MyApp>
   }
 
   @override
-  void onDecoded(String? result) {
+  void onDecoded(ScannedData? scannedData) {
     setState(() {
-      scannedCode = result;
+      this.scannedData = scannedData;
     });
   }
 
   @override
   void onError(Exception error) {
     setState(() {
-      scannedCode = error.toString();
+      errorMessage = error.toString();
     });
   }
+
+  Widget get scannedDataView => RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+            style: TextStyle(
+                color: Theme.of(context).textTheme.bodyText1?.color,
+                height: 0.8),
+            children: [
+              const TextSpan(text: 'Scanned code: '),
+              TextSpan(
+                  text: '${scannedData?.code}\n\n',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              const TextSpan(text: 'Scanned codeId symbol: '),
+              TextSpan(
+                  text: '${scannedData?.codeId}\n\n',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              const TextSpan(text: 'Scanned code type: '),
+              TextSpan(
+                  text: '${scannedData?.codeType}\n\n',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              const TextSpan(text: 'Scanned aimId: '),
+              TextSpan(
+                  text: '${scannedData?.aimId}\n\n',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              const TextSpan(text: 'Scanned charset: '),
+              TextSpan(
+                  text: '${scannedData?.charset}\n\n',
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+            ]),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +149,8 @@ class _MyAppState extends State<MyApp>
                         color: scannerEnabled ? Colors.blue : Colors.orange),
                   ),
                   const SizedBox(height: 8),
-                  Text('Scanned code: $scannedCode'),
+                  if (scannedData != null && errorMessage == null)
+                    scannedDataView,
                   const SizedBox(height: 8),
                   if (errorMessage != null) ...[
                     Text(

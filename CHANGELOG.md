@@ -9,6 +9,18 @@ Types of changes
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## 4.0.0+14 (2022-04-21)
+### Added
+- New function `OnScannerDecodeCallback` available for specific `onDecoded` event callbacks
+- New function `OnScannerErrorCallback` available for specific `onError` event callbacks
+
+### Changed
+- Breaking change on `ScannerCallBack` class name which was renamed to `ScannerCallback`
+- Breaking change in `onDecode` function which now receives a `ScannedData` object with the scanned code itself and other info like the code type, code symbol, etc.
+
+### Removed
+- `setScannerCallBack` function removed from `HoneywellScanner`, if you need to set a scanner callback after scanner instantiation you can use the `scannerCallback` set property.
+
 ## 3.2.0+13 (2022-03-07)  
 ### Added
 - Scan trigger. Now scanning can be triggered by a button in your app.

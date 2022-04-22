@@ -28,12 +28,12 @@ public abstract class HoneywellScanner implements ScannerCallBack
      * <br>
      * Note that this method always called on a worker thread
      *
-     * @param code Encapsulates the result of decoding a barcode within an image
+     * @param scannedData Encapsulates the result of decoding a barcode within an image
      */
     @Override
-    public void onDecoded(String code)
+    public void onDecoded(ScannedData scannedData)
     {
-        if(scannerCallBack != null) scannerCallBack.onDecoded(code);
+        if(scannerCallBack != null) scannerCallBack.onDecoded(scannedData);
     }
 
     /**

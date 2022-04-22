@@ -9,10 +9,6 @@ import android.os.Bundle;
 import java.util.Map;
 
 /**
- * Created by luis901101 on 05/30/19.
- */
-
-/**
  * HoneywellScannerPlugin
  */
 public class HoneywellScannerBroadcasts extends HoneywellScanner
@@ -56,7 +52,7 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
          * Optional. Sets the profile to use. If profile is not available or if extra is not used, * the scanner will use factory default properties (not "DEFAULT" profile properties).
          * Values : String
          */
-        public static final String EXTRA_PROFILE = "com.honeywell.aidc.extra.EXTRA_PROFILE";
+//        public static final String EXTRA_PROFILE = "com.honeywell.aidc.extra.EXTRA_PROFILE";
 
         /**
          * Honeywell DataCollection Intent API
@@ -112,11 +108,14 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
                             String charset = intent.getStringExtra("charset");
                             String codeId = intent.getStringExtra("codeId");
                             String data = intent.getStringExtra("data");
-                            byte[] dataBytes = intent.getByteArrayExtra("dataBytes");
-                            //                            String dataBytesStr = bytesToHexString(dataBytes);
-                            String timestamp = intent.getStringExtra("timestamp");
-                            onDecoded(data);
+//                            byte[] dataBytes = intent.getByteArrayExtra("dataBytes");
+//                            //                            String dataBytesStr = bytesToHexString(dataBytes);
+//                            String timestamp = intent.getStringExtra("timestamp");
+                            onDecoded(new ScannedData(data, codeId, aimId, charset));
                         }
+                        break;
+                    case Constants.ACTION_CLAIM_SCANNER:
+                    case Constants.ACTION_RELEASE_SCANNER:
                         break;
                 }
             }catch(Exception e)
@@ -130,7 +129,6 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
     private ScanBroadcastReceiver scanBroadcastReceiver;
     private IntentFilter intentFilter;
     private Bundle properties;
-    private boolean isOpened;
 
     public HoneywellScannerBroadcasts(Context context)
     {
@@ -218,7 +216,6 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
                     .putExtra(Constants.EXTRA_SCANNER, Constants.EXTRA_SCANNER_VALUE_IMAGER)
                     .putExtra(Constants.EXTRA_PROPERTIES, bundle);
             context.sendBroadcast(intent);
-            isOpened = true;
         }catch(Exception e)
         {
             e.printStackTrace();
@@ -234,7 +231,6 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
         {
             Intent intent = new Intent(Constants.ACTION_RELEASE_SCANNER);
             context.sendBroadcast(intent);
-            isOpened = false;
         }catch(Exception e)
         {
             e.printStackTrace();
@@ -243,19 +239,19 @@ public class HoneywellScannerBroadcasts extends HoneywellScanner
     }
 
     @Override
-    public void softwareTrigger(boolean state) throws Exception
+    public void softwareTrigger(boolean state)
     {
 
     }
 
     @Override
-    public void startScanning() throws Exception
+    public void startScanning()
     {
 
     }
 
     @Override
-    public void stopScanning() throws Exception
+    public void stopScanning()
     {
 
     }

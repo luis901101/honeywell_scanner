@@ -123,7 +123,8 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
                     break;
                 case _SOFTWARE_TRIGGER:
                     if(scanner != null) {
-                        scanner.softwareTrigger((Boolean) call.arguments());
+                        if(call.arguments() != null)
+                            scanner.softwareTrigger(call.arguments());
                         result.success(true);
                     }
                     else scannerNotInitialized(result);
@@ -148,7 +149,7 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
         }catch(Exception e)
         {
             e.printStackTrace();
-            result.error(e.getMessage(), null, null);
+            result.error("error", e.getMessage(), e);
         }
     }
 
@@ -158,12 +159,12 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
      * <br>
      * Note that this method always called on a worker thread
      *
-     * @param code Encapsulates the result of decoding a barcode within an image
+     * @param scannedData Encapsulates the result of decoding a barcode within an image
      */
     @Override
-    public void onDecoded(final String code)
+    public void onDecoded(final ScannedData scannedData)
     {
-        handler.post(() -> channel.invokeMethod(_ON_DECODED, code));
+        handler.post(() -> channel.invokeMethod(_ON_DECODED, scannedData.toMap()));
     }
 
     /**

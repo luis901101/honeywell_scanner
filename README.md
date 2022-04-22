@@ -40,6 +40,12 @@ CT60XP
 If your device doesn't show up in the list above, give it a try anyway...
 
 
+## Migration instructions
+From any version prior to ^4.0.0+14 you must:
+- Rename any mention of `ScannerCallBack` to `ScannerCallback` in your code. 
+- `setScannerCallBack` function is no longer available in `HoneywellScanner`, if you need to set a scanner callback after scanner constructor you can use the `scannerCallback` set property.
+- Change the override of the `onDecode` function to receive a `ScannedData` object instead of a `String`.
+- `ScannedData` object contains the scanned code and other info related to the scanned code.
 
 ## How to use
 
@@ -78,32 +84,58 @@ To use the honeywell_scanner plugin just:
 ```dart
 HoneywellScanner honeywellScanner = HoneywellScanner();
 ```
+You can also set the onDecode and onError callbacks in the constructior like:
+```dart
+HoneywellScanner honeywellScanner = HoneywellScanner(scannerCallback: this);
+```
+which uses an abstract callback implementation. Or you can use function callbacks like:
+```dart
+HoneywellScanner honeywellScanner = HoneywellScanner(
+    onScannerDecodeCallback: (scannedData) {
+      // Do something here
+    },
+    onScannerErrorCallback: (error) {
+      // Do something here
+    }
+  );
+```
+
 
 1. Check if device is supported. Take into account this plugin supports a list of Honeywell devices but not all, so this function ensures you compatibility.
 ```dart
 isDeviceSupported = await honeywellScanner.isSupported();
 ```
 
-2. Set the ScannerCallBack listener:
+2. You can set the scanner callback listeners after constructor like:
 ```dart
 honeywellScanner.setScannerCallBack(this);
 ```
+Or
+```dart
+honeywellScanner.onScannerDecodeCallback = (scannedData) {
+// Do something here
+};
+honeywellScanner.onScannerErrorCallback = (error) {
+// Do something here
+};
+```
+
 
 3. Override the ScannerCallback methods
 ```dart
 @override
-  void onDecoded(String result) {
-    setState(() {
-      scannedCode = result;
-    });
-  }
+void onDecoded(ScannedData? scannedData) {
+  setState(() {
+    this.scannedData = scannedData;
+  });
+}
 
-  @override
-  void onError(Exception error) {
-    setState(() {
-      scannedCode = error.toString();
-    });
-  }
+@override
+void onError(Exception error) {
+  setState(() {
+    errorMessage = error.toString();
+  });
+}
 ```
 
 4. Setting properties. By default **honeywell_scanner** sets properties to support all code formats from `CodeFormat` enum, it also sets the trigger control property to `autoControl` and disables browser launching when scanning urls.

@@ -14,11 +14,11 @@ public interface ScannerCallBack
      * <br>
      * Note that this method always called on a worker thread
      *
-     * @param code Encapsulates the result of decoding a barcode within an image
+     * @param scannedData Encapsulates the result of decoding a barcode within an image
      * @see Handler
      * @see Activity#runOnUiThread(Runnable)
      */
-    void onDecoded(String code);
+    void onDecoded(ScannedData scannedData);
     /**
      * Called when error has occurred
      * <br>
