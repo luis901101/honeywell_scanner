@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    WidgetsBinding.instance?.addObserver(this);
     honeywellScanner.scannerCallback = this;
     // honeywellScanner.onScannerDecodeCallback = onDecoded;
     // honeywellScanner.onScannerErrorCallback = onError;
