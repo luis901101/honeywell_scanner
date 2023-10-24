@@ -74,7 +74,9 @@ Add this `include ':honeywell'` to your `settings.gradle` in your android projec
 
 # Fourth
 
-Add `tools:replace="android:label"` under `application` tag in your **AndroidManifest.xml**, this is required because the **honeywell.aar** library defines an `android:label="@string/app_name"` which conflicts with your project's label resulting in a *Manifest merger failed* error
+Add `tools:replace="android:label"` under `application` tag in your **AndroidManifest.xml**, this is required because the **honeywell.aar** library defines an `android:label="@string/app_name"` which conflicts with your project's label resulting in a *Manifest merger failed* error.
+
+If error remains, you should check if `xmlns:tools="http://schemas.android.com/tools"` is missing in the manifest block.
 
 
 # Fifth
@@ -84,7 +86,7 @@ To use the honeywell_scanner plugin just:
 ```dart
 HoneywellScanner honeywellScanner = HoneywellScanner();
 ```
-You can also set the onDecode and onError callbacks in the constructior like:
+You can also set the onDecode and onError callbacks in the constructor like:
 ```dart
 HoneywellScanner honeywellScanner = HoneywellScanner(scannerCallback: this);
 ```
