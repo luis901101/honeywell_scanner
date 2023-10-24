@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 enum CodeFormat {
   /// Aztec 2D barcode format.
   AZTEC,
@@ -109,8 +107,6 @@ extension CodeFormatUtils on CodeFormat {
     CodeFormat.PDF_417,
     CodeFormat.QR_CODE
   ];
-
-  String get name => describeEnum(this);
 
   String? get propertyName {
     try {

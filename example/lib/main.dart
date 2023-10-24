@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addObserver(this);
+    WidgetsBinding.instance.addObserver(this);
     honeywellScanner.scannerCallback = this;
     // honeywellScanner.onScannerDecodeCallback = onDecoded;
     // honeywellScanner.onScannerErrorCallback = onError;
@@ -96,7 +96,7 @@ class _MyAppState extends State<MyApp>
         textAlign: TextAlign.center,
         text: TextSpan(
             style: TextStyle(
-                color: Theme.of(context).textTheme.bodyText1?.color,
+                color: Theme.of(context).textTheme.bodyLarge?.color,
                 height: 0.8),
             children: [
               const TextSpan(text: 'Scanned code: '),
@@ -242,7 +242,7 @@ class _MyAppState extends State<MyApp>
         honeywellScanner.pauseScanner();
         break;
       case AppLifecycleState
-          .paused: //AppLifecycleState.paused is used as stopped state because deactivate() works more as a pause for lifecycle
+            .paused: //AppLifecycleState.paused is used as stopped state because deactivate() works more as a pause for lifecycle
         honeywellScanner.pauseScanner();
         break;
       case AppLifecycleState.detached:

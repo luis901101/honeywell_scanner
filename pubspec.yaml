@@ -1,11 +1,11 @@
 name: honeywell_scanner
 description: This is a plugin to scan barcodes by using Honeywell PDA Android devices.
-version: 4.0.0+14
+version: 5.0.0+1
 homepage: https://github.com/luis901101/honeywell_scanner
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
-  flutter: ">=1.22.0"
+  sdk: ">=2.18.0 <4.0.0"
+  flutter: '>=1.22.0'
 
 dependencies:
   flutter:
