@@ -9,6 +9,10 @@ Types of changes
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## 5.0.0+2 (2022-10-24)
+### Added
+- Added pub topics to package metadata.
+
 ## 5.0.0+1 (2022-10-24)
 ### Added
 - Added support of namespace property to support Android Gradle Plugin (AGP) 8. Projects with AGP < 4.2 should be compatible as well but it is highly recommended to update at least to AGP 7.0 or newer.
