@@ -28,6 +28,7 @@
 .pub-cache/
 .pub/
 build/
+pubspec.lock
 .flutter-plugins-dependencies
 
 # Android related
