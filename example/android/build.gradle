@@ -1,23 +1,7 @@
-buildscript {
-    repositories {
-        google()
-        mavenCentral()
-//        jcenter() //JCenter will be removed on February 1, 2022.
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:8.1.2'
-    }
-}
-
 allprojects {
     repositories {
         google()
         mavenCentral()
-//        jcenter() //JCenter will be removed on February 1, 2022.
-//        flatDir {
-//            dirs 'libs'
-//        }
     }
 }
 

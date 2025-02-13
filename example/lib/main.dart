@@ -9,10 +9,10 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  State createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp>
@@ -187,18 +187,20 @@ class _MyAppState extends State<MyApp>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        child: const Text("Start Scanner"),
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.blue)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                        ),
                         onPressed: () => onClick(BTN_START_SCANNER),
+                        child: const Text("Start Scanner"),
                       ),
                       ElevatedButton(
-                        child: const Text("Stop Scanner"),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.blue.shade700)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue.shade700,
+                          foregroundColor: Colors.white,
+                        ),
                         onPressed: () => onClick(BTN_STOP_SCANNER),
+                        child: const Text("Stop Scanner"),
                       ),
                     ],
                   ),
@@ -207,18 +209,20 @@ class _MyAppState extends State<MyApp>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        child: const Text("Start Scanning"),
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.green)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                        ),
                         onPressed: () => onClick(BTN_START_SCANNING),
+                        child: const Text("Start Scanning"),
                       ),
                       ElevatedButton(
-                        child: const Text("Stop Scanning"),
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                Colors.green.shade700)),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green.shade700,
+                          foregroundColor: Colors.white,
+                        ),
                         onPressed: () => onClick(BTN_STOP_SCANNING),
+                        child: const Text("Stop Scanning"),
                       ),
                     ],
                   ),
