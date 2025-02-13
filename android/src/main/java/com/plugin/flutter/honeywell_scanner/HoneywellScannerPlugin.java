@@ -13,7 +13,7 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+//import io.flutter.plugin.common.PluginRegistry.Registrar;
 
 /**
  * HoneywellScannerPlugin
@@ -52,15 +52,15 @@ public class HoneywellScannerPlugin implements FlutterPlugin, MethodCallHandler,
     }
 
     // This static method is only to remain compatible with apps that don’t use the v2 Android embedding.
-    @Deprecated()
-    @SuppressLint("Registrar")
-    public static void registerWith(Registrar registrar)
-    {
-        new HoneywellScannerPlugin().init(
-            registrar.context(),
-            registrar.messenger()
-        );
-    }
+//    @Deprecated()
+//    @SuppressLint("Registrar")
+//    public static void registerWith(Registrar registrar)
+//    {
+//        new HoneywellScannerPlugin().init(
+//            registrar.context(),
+//            registrar.messenger()
+//        );
+//    }
 
     public HoneywellScannerPlugin() {
         handler = new Handler();

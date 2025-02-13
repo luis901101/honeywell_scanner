@@ -9,6 +9,13 @@ Types of changes
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## 6.0.0+0 (2025-02-13)
+### Changed
+- Example project updated to adjust to latest flutter version.
+
+### Removed
+- (Breaking) Removed deprecated support of plugin registrant for apps that doesn't support v2 Android embedding
+
 ## 5.0.0+2 (2023-10-24)
 ### Added
 - Added pub topics to package metadata.
