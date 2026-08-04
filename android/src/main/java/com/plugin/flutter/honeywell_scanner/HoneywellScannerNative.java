@@ -5,7 +5,6 @@ import com.honeywell.aidc.AidcManager;
 import com.honeywell.aidc.BarcodeFailureEvent;
 import com.honeywell.aidc.BarcodeReadEvent;
 import com.honeywell.aidc.BarcodeReader;
-import com.honeywell.aidc.InvalidScannerNameException;
 import com.honeywell.aidc.UnsupportedPropertyException;
 import java.util.HashMap;
 import java.util.Map;
@@ -68,12 +67,62 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
 
             if(properties != null) scanner.setProperties(properties);
             initialized = true;
-            initializing = false;
             if(pendingResume) resumeScanner();
         }
-        catch (InvalidScannerNameException e){
+        catch (Exception e){
+            // The scanner service may be dead or unreachable, release whatever was
+            // created so a later startScanner() can init() again without leaking it.
+            releaseResources();
             onError(e);
         }
+        finally {
+            initializing = false;
+        }
+    }
+
+    /**
+     * Closes the scanner and the scanner manager ignoring any error, since it's
+     * meant to be used when the scanner service is already in a faulty state.
+     */
+    private void releaseResources()
+    {
+        try
+        {
+            if (scanner != null) {
+                // unregister barcode event listener
+                scanner.removeBarcodeListener(this);
+
+                // unregister trigger state change listener
+                // When using Automatic Trigger control do not need to implement the onTriggerEvent
+                // function scanner.removeTriggerListener(this);
+
+                // release the scanner claim so we don't get any scanner notifications while paused
+                // and the scanner properties are restored to default.
+                scanner.release();
+
+                // close BarcodeReader to clean up resources.
+                scanner.close();
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally { scanner = null; }
+
+        try
+        {
+            // close AidcManager to disconnect from the scanner service.
+            // once closed, the object can no longer be used.
+            if (scannerManager != null) scannerManager.close();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally { scannerManager = null; }
+
+        initialized = false;
     }
 
     @Override
@@ -187,44 +236,7 @@ public class HoneywellScannerNative extends HoneywellScanner implements AidcMana
     public boolean stopScanner()
     {
         pendingResume = false;
-        try
-        {
-            if (scanner != null) {
-                // unregister barcode event listener
-                scanner.removeBarcodeListener(this);
-
-                // unregister trigger state change listener
-                // When using Automatic Trigger control do not need to implement the onTriggerEvent
-                // function scanner.removeTriggerListener(this);
-
-                // release the scanner claim so we don't get any scanner notifications while paused
-                // and the scanner properties are restored to default.
-                scanner.release();
-
-                // close BarcodeReader to clean up resources.
-                scanner.close();
-                scanner = null;
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        try
-        {
-            if (scannerManager != null) {
-                // close AidcManager to disconnect from the scanner service.
-                // once closed, the object can no longer be used.
-                scannerManager.close();
-                scannerManager = null;
-            }
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        initialized = false;
+        releaseResources();
         return true;
     }
 }

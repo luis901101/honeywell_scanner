@@ -9,6 +9,11 @@ Types of changes
 - `Fixed` for any bug fixes.
 - `Security` in case of vulnerabilities.
 
+## 8.0.1 (2026-08-04)
+### Fixed
+- Scanner initialization errors no longer crash the host app, any exception thrown while creating the barcode reader, like the `RuntimeException` caused by a dead Honeywell AIDC service, is now reported through the `onError` callback.
+- Scanner resources are now released when initialization fails, so a later `startScanner()` call can retry the initialization instead of leaving the scanner unusable.
+
 ## 8.0.0 (2025-12-03)
 ### Changed
 - AGP updated to use v8.13.1
